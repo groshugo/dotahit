@@ -83,7 +83,7 @@ namespace DotaHIT.Jass.Commands
                     char* ptr = DHJassSyntax.removeWsRbRecursive(pStr, pStr + code.Length);
                     code = new string(ptr);
 
-                    if (isDirectValue = DHJassSyntax.checkDirectValueSyntaxFast(*ptr)) //! fixed *pStr to *ptr to prevent null pointer crashes
+                    if (isDirectValue = DHJassSyntax.checkDirectValueSyntaxFast(*ptr)) //! fixed *pStr to *ptr
                     {
                         foreach (DHJassValue parser in DbJassTypeValueKnowledge.TypeValuePairs.Values)
                             if (parser.TryParseDirect(code, out parsedValue))
