@@ -484,13 +484,18 @@
   <ItemGroup>
     <None Include="Resources\GoToParentFolder.bmp" />
     <None Include="Resources\GoToParentFolderHS.png" />
-    <None Include="bin\Debug\dotaMapImage.jpg" />
     <None Include="Resources\defaultInfoBox.gif" />
     <None Include="Resources\defaultMainPanel.gif" />
     <None Include="Resources\defaultSkillTable.gif" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\dhhelp.chm" />
+    <None Include="bin\Release\dhhelp.chm" />
     <None Include="Resources\Control_Sound.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\libblp.dll" />
+    <Content Include="bin\Release\libblp.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
