@@ -1,3 +1,0 @@
-D:\Documents and Settings\atata\Рабочий стол\DotaHIT_v0.999q_source\DotaHAB\Explorer Control\ExpTreeSharpLib\obj\Release\ResolveAssemblyReference.cache
-D:\Documents and Settings\atata\Рабочий стол\DotaHIT_v0.999q_source\DotaHAB\Explorer Control\ExpTreeSharpLib\obj\Release\ExpTreeLib.ExpTree.resources
-D:\Documents and Settings\atata\Рабочий стол\DotaHIT_v0.999q_source\DotaHAB\Explorer Control\ExpTreeSharpLib\obj\Release\ExpTreeLib.csproj.GenerateResource.Cache
