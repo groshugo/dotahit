@@ -28,8 +28,8 @@ namespace DotaHIT
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.captionB = new System.Windows.Forms.Button();
             this.closeB = new System.Windows.Forms.Button();
             this.war3PathTextBox = new System.Windows.Forms.TextBox();
@@ -37,6 +37,13 @@ namespace DotaHIT
             this.applyB = new System.Windows.Forms.Button();
             this.cancelB = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chooseVerdanaFontB = new System.Windows.Forms.Button();
+            this.verdanaFontTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.chooseArialFontB = new System.Windows.Forms.Button();
+            this.arialFontTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.useOwnDialogsCB = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.fileTypesGridView = new System.Windows.Forms.DataGridView();
@@ -47,18 +54,11 @@ namespace DotaHIT
             this.restoreCB = new System.Windows.Forms.CheckBox();
             this.war3PathBrowseB = new System.Windows.Forms.Button();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.label2 = new System.Windows.Forms.Label();
-            this.arialFontTextBox = new System.Windows.Forms.TextBox();
-            this.chooseArialFontB = new System.Windows.Forms.Button();
-            this.chooseVerdanaFontB = new System.Windows.Forms.Button();
-            this.verdanaFontTextBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileTypesGridView)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // captionB
@@ -145,7 +145,7 @@ namespace DotaHIT
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.CadetBlue;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(147)))), ((int)(((byte)(148)))));
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.useOwnDialogsCB);
             this.panel1.Controls.Add(this.groupBox1);
@@ -158,6 +158,78 @@ namespace DotaHIT
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(396, 315);
             this.panel1.TabIndex = 20;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.chooseVerdanaFontB);
+            this.groupBox2.Controls.Add(this.verdanaFontTextBox);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.chooseArialFontB);
+            this.groupBox2.Controls.Add(this.arialFontTextBox);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.ForeColor = System.Drawing.Color.White;
+            this.groupBox2.Location = new System.Drawing.Point(8, 222);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(379, 49);
+            this.groupBox2.TabIndex = 28;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Font replacements";
+            // 
+            // chooseVerdanaFontB
+            // 
+            this.chooseVerdanaFontB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chooseVerdanaFontB.ForeColor = System.Drawing.Color.Black;
+            this.chooseVerdanaFontB.Location = new System.Drawing.Point(352, 17);
+            this.chooseVerdanaFontB.Name = "chooseVerdanaFontB";
+            this.chooseVerdanaFontB.Size = new System.Drawing.Size(19, 23);
+            this.chooseVerdanaFontB.TabIndex = 15;
+            this.chooseVerdanaFontB.Text = "…";
+            this.chooseVerdanaFontB.UseVisualStyleBackColor = true;
+            this.chooseVerdanaFontB.Click += new System.EventHandler(this.chooseVerdanaFontB_Click);
+            // 
+            // verdanaFontTextBox
+            // 
+            this.verdanaFontTextBox.Location = new System.Drawing.Point(256, 19);
+            this.verdanaFontTextBox.Name = "verdanaFontTextBox";
+            this.verdanaFontTextBox.Size = new System.Drawing.Size(95, 20);
+            this.verdanaFontTextBox.TabIndex = 14;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(206, 22);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(47, 13);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Verdana";
+            // 
+            // chooseArialFontB
+            // 
+            this.chooseArialFontB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chooseArialFontB.ForeColor = System.Drawing.Color.Black;
+            this.chooseArialFontB.Location = new System.Drawing.Point(144, 17);
+            this.chooseArialFontB.Name = "chooseArialFontB";
+            this.chooseArialFontB.Size = new System.Drawing.Size(19, 23);
+            this.chooseArialFontB.TabIndex = 12;
+            this.chooseArialFontB.Text = "…";
+            this.chooseArialFontB.UseVisualStyleBackColor = true;
+            this.chooseArialFontB.Click += new System.EventHandler(this.chooseArialFontB_Click);
+            // 
+            // arialFontTextBox
+            // 
+            this.arialFontTextBox.Location = new System.Drawing.Point(48, 19);
+            this.arialFontTextBox.Name = "arialFontTextBox";
+            this.arialFontTextBox.Size = new System.Drawing.Size(95, 20);
+            this.arialFontTextBox.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(27, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Arial";
             // 
             // useOwnDialogsCB
             // 
@@ -190,28 +262,28 @@ namespace DotaHIT
             this.fileTypesGridView.AllowUserToResizeRows = false;
             this.fileTypesGridView.BackgroundColor = System.Drawing.Color.GhostWhite;
             this.fileTypesGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.PaleTurquoise;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.fileTypesGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.PaleTurquoise;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.fileTypesGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.fileTypesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.fileTypesGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.extensionCoumn,
             this.descriptionColumn,
             this.associateColumn,
             this.contextMenuColumn});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.fileTypesGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.fileTypesGridView.DefaultCellStyle = dataGridViewCellStyle8;
             this.fileTypesGridView.EnableHeadersVisualStyles = false;
             this.fileTypesGridView.Location = new System.Drawing.Point(7, 18);
             this.fileTypesGridView.MultiSelect = false;
@@ -285,82 +357,10 @@ namespace DotaHIT
             this.folderBrowserDialog.RootFolder = System.Environment.SpecialFolder.MyComputer;
             this.folderBrowserDialog.ShowNewFolderButton = false;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.chooseVerdanaFontB);
-            this.groupBox2.Controls.Add(this.verdanaFontTextBox);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.chooseArialFontB);
-            this.groupBox2.Controls.Add(this.arialFontTextBox);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(8, 222);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(379, 49);
-            this.groupBox2.TabIndex = 28;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Font replacements";
-            // 
             // fontDialog1
             // 
             this.fontDialog1.FontMustExist = true;
             this.fontDialog1.ShowEffects = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(27, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Arial";
-            // 
-            // arialFontTextBox
-            // 
-            this.arialFontTextBox.Location = new System.Drawing.Point(48, 19);
-            this.arialFontTextBox.Name = "arialFontTextBox";
-            this.arialFontTextBox.Size = new System.Drawing.Size(95, 20);
-            this.arialFontTextBox.TabIndex = 1;
-            // 
-            // chooseArialFontB
-            // 
-            this.chooseArialFontB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chooseArialFontB.ForeColor = System.Drawing.Color.Black;
-            this.chooseArialFontB.Location = new System.Drawing.Point(144, 17);
-            this.chooseArialFontB.Name = "chooseArialFontB";
-            this.chooseArialFontB.Size = new System.Drawing.Size(19, 23);
-            this.chooseArialFontB.TabIndex = 12;
-            this.chooseArialFontB.Text = "…";
-            this.chooseArialFontB.UseVisualStyleBackColor = true;
-            this.chooseArialFontB.Click += new System.EventHandler(this.chooseArialFontB_Click);
-            // 
-            // chooseVerdanaFontB
-            // 
-            this.chooseVerdanaFontB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chooseVerdanaFontB.ForeColor = System.Drawing.Color.Black;
-            this.chooseVerdanaFontB.Location = new System.Drawing.Point(352, 17);
-            this.chooseVerdanaFontB.Name = "chooseVerdanaFontB";
-            this.chooseVerdanaFontB.Size = new System.Drawing.Size(19, 23);
-            this.chooseVerdanaFontB.TabIndex = 15;
-            this.chooseVerdanaFontB.Text = "…";
-            this.chooseVerdanaFontB.UseVisualStyleBackColor = true;
-            this.chooseVerdanaFontB.Click += new System.EventHandler(this.chooseVerdanaFontB_Click);
-            // 
-            // verdanaFontTextBox
-            // 
-            this.verdanaFontTextBox.Location = new System.Drawing.Point(256, 19);
-            this.verdanaFontTextBox.Name = "verdanaFontTextBox";
-            this.verdanaFontTextBox.Size = new System.Drawing.Size(95, 20);
-            this.verdanaFontTextBox.TabIndex = 14;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(206, 22);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 13);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "Verdana";
             // 
             // SettingsForm
             // 
@@ -383,11 +383,11 @@ namespace DotaHIT
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SettingsForm_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileTypesGridView)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
