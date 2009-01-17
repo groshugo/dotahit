@@ -1201,9 +1201,9 @@ namespace DotaHIT
             this.versionLabel.ForeColor = System.Drawing.Color.White;
             this.versionLabel.Location = new System.Drawing.Point(257, 5);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(57, 13);
+            this.versionLabel.Size = new System.Drawing.Size(65, 13);
             this.versionLabel.TabIndex = 32;
-            this.versionLabel.Text = "v0.999r";
+            this.versionLabel.Text = "v0.999r1";
             // 
             // inventoryLL
             // 
