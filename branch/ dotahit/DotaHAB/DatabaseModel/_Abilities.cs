@@ -930,7 +930,9 @@ namespace DotaHIT.DatabaseModel.Abilities
         public virtual void refresh()
         {
             hpsLevelMeta = GetProps(true);
-
+            if (this is DBINVENTORYABILITY && owner != null)
+                if ((owner as unit).forceInventorySize != 0)
+                hpsLevelMeta["inv1"] = (owner as unit).forceInventorySize;
             this.refresh(hpsLevelMeta);
 
             if (Owner != null)
@@ -4238,6 +4240,7 @@ namespace DotaHIT.DatabaseModel.Abilities
         {
             base.refresh(hps);
 
+
             /////////////////////////////
             // get number of slots
             /////////////////////////////
@@ -4250,8 +4253,10 @@ namespace DotaHIT.DatabaseModel.Abilities
             if (owner is unit)
             {
                 unit hero = owner as unit;
-
-                hero.Inventory.init(slots, 4); // 4 additional slots for backpack
+                if (hero.forceInventorySize == 0)
+                    hero.Inventory.init(slots, 4); // 4 additional slots for backpack
+                else
+                    hero.Inventory.init(hero.forceInventorySize, 4); //!
                 return true;
             }
 

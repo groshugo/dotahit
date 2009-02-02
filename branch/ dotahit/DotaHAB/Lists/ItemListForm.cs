@@ -289,7 +289,12 @@ namespace DotaHIT
             // the map script checks if buying unit 
             // is located near the shop, so here we set
             // the hero's location to the selected shop's location
-            Current.unit.set_location(shop.get_location());
+            // & remove other units from shop checking
+            foreach (unit unit in Current.player.units.Values)
+                if (unit == Current.unit)
+                    unit.set_location(shop.get_location());
+                else
+                    unit.set_location(new location(0,0));
 
             switch (combineMode)
             {
@@ -319,7 +324,7 @@ namespace DotaHIT
             if (isNewVersionItem)
             {
                 (item as unit).DoSummon = true;
-                (item as unit).set_owningPlayer(Current.player);                
+                (item as unit).set_owningPlayer(Current.unit.get_owningPlayer()); //!               
 
                 shop.OnSell(item as unit); // sell item as unit
             }
