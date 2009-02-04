@@ -357,6 +357,16 @@ namespace DotaHIT.Extras
                 replayFinder = new DotaHIT.Extras.Replay_Parser.ReplayFinder(this, browser.SelectedPath);
                 replayFinder.Show();
             }
+        }
+
+        private void includeNamesCB_CheckedChanged(object sender, EventArgs e)
+        {
+            namesCmbB.Enabled = includeNamesCB.Checked;
+        }
+
+        private void namesCmbB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            layoutCmbB_SelectedIndexChanged(null, EventArgs.Empty);
         }                                           
     }
 }

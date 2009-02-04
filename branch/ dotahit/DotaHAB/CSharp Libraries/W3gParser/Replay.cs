@@ -34,6 +34,7 @@ namespace Deerchao.War3Share.W3gParser
         private string name;
         private Player host;
         private GameSettings settings;
+        private string mode;
         private readonly List<Team> teams = new List<Team>();
         private readonly List<Player> players = new List<Player>();
         private readonly List<ChatInfo> chats = new List<ChatInfo>();
@@ -43,6 +44,12 @@ namespace Deerchao.War3Share.W3gParser
         internal Dictionary<int, Hero> dcHeroCache = new Dictionary<int, Hero>();
 
         private readonly long size;
+
+        public string GameMode
+        {
+            get { return mode; }
+        }
+
         public long Size
         {
             get { return size; }
@@ -219,7 +226,7 @@ namespace Deerchao.War3Share.W3gParser
             Current.player = GetPlayerBySpecialSlot(1).player;
             Current.player.units.Clear();
             foreach (Player player in players)
-            if(!player.IsObserver)
+            if (!player.IsObserver)
             {
                 player.Hero.Level = player.GetMostUsedHero().Level;
                 foreach (OrderItem skill in player.GetMostUsedHero().Abilities.BuildOrders)
@@ -229,13 +236,11 @@ namespace Deerchao.War3Share.W3gParser
                             ability.level_up();
                             break;
                         }
-                player.Hero.Updated = true;
                 Current.player.units.Add(player.Id, player.Hero);
             }
             // fix player slots for -sp mode
             this.SpModeFix();
 
-            UnitsForm.ReloadUnits();
 #if !SUPRESS_HASH_CALCULATION 
             hashWriter.Write(version);
             hashWriter.Write(map.Hash);
@@ -736,11 +741,14 @@ namespace Deerchao.War3Share.W3gParser
                         case 0x60:
                             //unknownA, unknownB
                             reader.ReadInt64();
-                            len = 0;
-                            while (reader.ReadByte() != 0)
-                                len++;
+                            long pos = reader.BaseStream.Position;
+                            string command = ParserUtility.ReadString(reader).ToLower();
+                            if (player.Color == PlayerColor.Blue && time < 15000 && mode == null)
+                                if ((command != "-di") && (command != "-hhn"))
+                                    mode = command;
 
-                            prest -= (short)(10 + len);
+                            long delta = reader.BaseStream.Position - pos;
+                            prest -= (short)(10 + delta);
                             break;
                         //esc pressed
                         case 0x61:
@@ -1045,12 +1053,12 @@ namespace Deerchao.War3Share.W3gParser
 
         bool FillUpPlayerInventory(Player p)
         {
-            //TODO: insert inventory stuff here
             IRecord item;
             unit shop = null;
             Current.player = p.player;
             Current.unit = p.Hero;
             String itemID = null;
+            DBINVENTORY Inventory = p.Hero.Inventory;
 
             foreach (OrderItem orderitem in p.Items.BuildOrders)
             {
@@ -1091,101 +1099,78 @@ namespace Deerchao.War3Share.W3gParser
                 else
                     shop.OnSellItem(item as item, p.Hero);
 
-                Thread.Sleep(10); // to pass control to item handling script thread
+                Thread.Sleep(2); // to pass control to item handling script thread
                 System.Windows.Forms.Application.DoEvents();
-                for (int i = 0; i < p.Hero.Inventory.Capacity-2; i++)
+                for (int i = 0; i < Inventory.Capacity-2; i++)
                 {
-                    if (p.Hero.Inventory.itemAt(i) != null)
+                    if (Inventory.itemAt(i) != null)
                     {
-                        // || p.Hero.Inventory[i].Item.iconName.ToString().ToLower().Contains("scroll")
-                        if (!p.Hero.Inventory[i].Item.uses.IsNull/* || p.Hero.Inventory[i].Item.goldCost == 57*/)
+                        // || Inventory[i].Item.iconName.ToString().ToLower().Contains("scroll")
+                        if (!Inventory[i].Item.uses.IsNull/* || Inventory[i].Item.goldCost == 57*/)
                         {
-                            p.Hero.Inventory[i].drop_item();
+                            Inventory[i].drop_item();
                             break;
                         }
                     }
                 }
                 // Shift down
-                for (int i = 0; i < p.Hero.Inventory.Capacity-2; i++)
-                    if (p.Hero.Inventory.itemAt(i) == null && p.Hero.Inventory.itemAt(i + 1) != null)
+                for (int i = 0; i < Inventory.Capacity-2; i++)
+                    if (Inventory.itemAt(i) == null && Inventory.itemAt(i + 1) != null)
                     {
-                        p.Hero.Inventory.swap_items(p.Hero.Inventory[i], p.Hero.Inventory[i + 1]);
-                        p.Hero.OnPickupItem(p.Hero.Inventory[i].Item);
+                        Inventory.swap_items(Inventory[i], Inventory[i + 1]);
+                        p.Hero.OnPickupItem(Inventory[i].Item);
                     }
 
-                for (int i = 6; i < p.Hero.Inventory.Capacity - 2; i++)
+                for (int i = 6; i < Inventory.Capacity - 2; i++)
                 { 
-                    int index = FindCheapestItemIndex(p.Hero.Inventory);
-                    if (p.Hero.Inventory[i].Item!=null)
-                        if (p.Hero.Inventory[i].Item.goldCost > p.Hero.Inventory[index].Item.goldCost/* && !p.Hero.Inventory[index].Item.Title.ToString().ToLower().Contains("boots")*/)
+                    int index = FindCheapestItemIndex(Inventory);
+                    if (Inventory[i].Item!=null)
+                        if (Inventory[i].Item.goldCost > Inventory[index].Item.goldCost/* && !Inventory[index].Item.Title.ToString().ToLower().Contains("boots")*/)
                         {
-                            p.Hero.Inventory.swap_items(p.Hero.Inventory[i], p.Hero.Inventory[FindCheapestItemIndex(p.Hero.Inventory)]);
-                            p.Hero.OnPickupItem(p.Hero.Inventory[0].Item);
+                            Inventory.swap_items(Inventory[i], Inventory[FindCheapestItemIndex(Inventory)]);
+                            p.Hero.OnPickupItem(Inventory[0].Item);
                         }
                 }
                 System.Windows.Forms.Application.DoEvents();
             }
 
-            for (int i = 6; i < p.Hero.Inventory.Capacity - 2; i++)
+            for (int i = 6; i < Inventory.Capacity - 2; i++)
             {
-                if (p.Hero.Inventory[i].Item != null)
+                if (Inventory[i].Item != null)
                 {
-                    //item tmp = p.Hero.Inventory[i].Item;
-                    //p.Hero.Inventory[i].Item = null;
-                    //p.Hero.Inventory.put_item(tmp, i);
-                    //shop.OnSellItem(p.Hero.Inventory[i].Item, p.Hero);
-                    int index = FindMostExpensiveItemIndex(p.Hero.Inventory);
-                    p.Hero.Inventory.swap_items(p.Hero.Inventory[i], p.Hero.Inventory[index]);
-                    p.Hero.OnPickupItem(p.Hero.Inventory[0].Item);
+                    int index = FindMostExpensiveItemIndex(Inventory);
+                    Inventory.swap_items(Inventory[i], Inventory[index]);
+                    p.Hero.OnPickupItem(Inventory[0].Item);
                     Thread.Sleep(2);
                     System.Windows.Forms.Application.DoEvents();
-                    p.Hero.Inventory.swap_items(p.Hero.Inventory[i], p.Hero.Inventory[index]);
-                    p.Hero.OnPickupItem(p.Hero.Inventory[0].Item);
+                    Inventory.swap_items(Inventory[i], Inventory[index]);
+                    p.Hero.OnPickupItem(Inventory[0].Item);
                     Thread.Sleep(2);
                     System.Windows.Forms.Application.DoEvents();
                 }
             }
-            // Shift down
-            for (int i = 0; i < p.Hero.Inventory.Capacity - 2; i++)
-            {
-                if (p.Hero.Inventory.itemAt(i) == null && p.Hero.Inventory.itemAt(i + 1) != null)
+            // Final Shift down
+            for (int j = 0; j < 5; j++ )
+                for (int i = 0; i < Inventory.Capacity - 2; i++)
                 {
-                    p.Hero.Inventory.swap_items(p.Hero.Inventory[i], p.Hero.Inventory[i + 1]);
-                    p.Hero.OnPickupItem(p.Hero.Inventory[i].Item);
+                    if (Inventory.itemAt(i) == null && Inventory.itemAt(i + 1) != null)
+                    {
+                        Inventory.swap_items(Inventory[i], Inventory[i + 1]);
+                        p.Hero.OnPickupItem(Inventory[i].Item);
+                    }
                 }
-            }
 
-
-            //Comparison<DBITEMSLOT> UpSorter = delegate(DBITEMSLOT a, DBITEMSLOT b)
-            //{
-            //    return (a.Item == null ? 20000 : (int)a.Item.goldCost) - (b.Item == null ? 10000 : (int)b.Item.goldCost);
-            //};
-
-            //Comparison<DBITEMSLOT> DownSorter = delegate(DBITEMSLOT a, DBITEMSLOT b)
-            //{
-            //    return (b.Item == null ? 0 : (int)b.Item.goldCost) - (a.Item == null ? 0 : (int)a.Item.goldCost);
-            //};
-
-
-            //p.Hero.Inventory.Sort(UpSorter);
-            //p.Hero.OnPickupItem(p.Hero.Inventory[0].Item);
-
-            //p.Hero.Inventory.Sort(DownSorter);
-            //p.Hero.OnPickupItem(p.Hero.Inventory[0].Item);
-          
-//            Thread.Sleep(2); // to pass control to item handling script thread
-//            System.Windows.Forms.Application.DoEvents();
             for (int i = 0; i < 4; i++ )
             {
-                p.Hero.Inventory.swap_items(p.Hero.Inventory[6+i],p.Hero.Inventory[p.Hero.Inventory.Capacity-4+i]);
+                Inventory.swap_items(Inventory[6+i],Inventory[Inventory.Capacity-4+i]);
             }
-            p.Hero.Inventory.RemoveRange(6, p.Hero.Inventory.Capacity - 10);
+            Inventory.RemoveRange(6, Inventory.Capacity - 10);
 
             System.Windows.Forms.Application.DoEvents();
             System.Console.WriteLine(p.Hero.Title);
             for (int i = 0; i < 6; i++)
-            if (p.Hero.Inventory[i].Item!=null)
-                Console.WriteLine(p.Hero.Inventory[i].Item.Title);
+            if (Inventory[i].Item!=null)
+                Console.WriteLine(Inventory[i].Item.Title);
             return true;
         }
         
@@ -1767,7 +1752,7 @@ namespace Deerchao.War3Share.W3gParser
 
             // create new hero
 
-            hero = new unit(StringId, p.Items.BuildOrders.Count);
+            hero = new unit(StringId, p.Items.BuildOrders.Count > 6 ? p.Items.BuildOrders.Count : 6);
             hero.DoSummon = true;
             hero.set_owningPlayer(p.player); //!
 
@@ -1775,7 +1760,6 @@ namespace Deerchao.War3Share.W3gParser
 
             sellingTavern.OnSell(hero);
             Current.unit = hero;
-    //        Current.player.units.Add(0,hero);
             return hero;
         }
     }
