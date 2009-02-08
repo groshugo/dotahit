@@ -1754,7 +1754,12 @@ namespace Deerchao.War3Share.W3gParser
 
             hero = new unit(StringId, p.Items.BuildOrders.Count > 6 ? p.Items.BuildOrders.Count : 6);
             hero.DoSummon = true;
-            hero.set_owningPlayer(p.player); //!
+//            hero.set_owningPlayer(p.player, 0, 0); //!
+            if (hero.get_owningPlayer()!= null) hero.get_owningPlayer().remove_unit(hero);
+
+            p.player.add_unit(hero);
+
+            hero.set_owningPlayer(p.player);
 
             // only new heroes process onsell event
 

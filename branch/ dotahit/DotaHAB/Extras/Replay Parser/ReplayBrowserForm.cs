@@ -297,8 +297,12 @@ namespace DotaHIT.Extras
                     currentReplay = new Replay(filename, MapRequired);
                     dcReplayCache[filename] = currentReplay;
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.Source);
+                    Console.WriteLine(ex.StackTrace);
+                    Console.WriteLine(ex.TargetSite);
                     MessageBox.Show("An error occured while parsing this replay");
                     currentReplay = null;
                     return false;

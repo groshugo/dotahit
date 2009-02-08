@@ -8141,6 +8141,271 @@ namespace DotaHIT.DatabaseModel.Abilities
         }
     }
 
+
+    public class DBACTIVEBLOODLUSTABILITY : DBABILITY
+    {
+        protected AbilityState abilityState;
+
+        private DBDOUBLE ims = new DBDOUBLE(null);
+        private string imsColumn;
+
+        private DBDOUBLE ias = new DBDOUBLE(null);
+        private string iasColumn;
+
+        public DBACTIVEBLOODLUSTABILITY() { }
+        public DBACTIVEBLOODLUSTABILITY(HabProperties hps)
+            : base(hps)
+        {
+            imsColumn = "Blo2";
+            iasColumn = "Blo1";
+        }
+
+        public override string codeID
+        {
+            get { return "Ablo"; }
+            set { }
+        }
+
+        public override void refresh(HabProperties hps)
+        {
+            base.refresh(hps);
+
+            /////////////////////////////
+            // get ias, ims
+            /////////////////////////////
+
+            this[ims] = hps.GetValue(imsColumn);
+            this[ias] = hps.GetValue(iasColumn);
+        }
+
+        public override bool Apply()
+        {
+            if (owner is unit)
+            {
+                unit hero = owner as unit;
+
+                this[hero.ims] = ims;
+                this[hero.ias] = ias;
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public override AbilityState AbilityState
+        {
+            get
+            {
+                return abilityState;
+            }
+            set
+            {
+                abilityState = value;
+            }
+        }
+
+        public override bool IsPassive
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public override double StackDataA
+        {
+            get
+            {
+                return ias;
+            }
+            set
+            {
+                ias.Value = value;
+            }
+        }
+        public override double StackDataB
+        {
+            get
+            {
+                return ims;
+            }
+            set
+            {
+                ims.Value = value;
+            }
+        }
+
+        public override void Stack(DBABILITY a)
+        {
+            this.StackDataA = Math.Max(this.StackDataA, a.StackDataA);
+            this.StackDataB = Math.Max(this.StackDataB, a.StackDataB);
+        }
+    }
+
+    public class DBACTIVEINNERFIREABILITY : DBABILITY
+    {
+        protected AbilityState abilityState;
+
+        private DBDOUBLE damageIncrease = new DBDOUBLE(null);
+        private string damageIncreaseColumn;
+
+        public DBACTIVEINNERFIREABILITY() { }
+        public DBACTIVEINNERFIREABILITY(HabProperties hps)
+            : base(hps)
+        {
+            damageIncreaseColumn = "Inf1";
+        }
+
+        public override string codeID
+        {
+            get { return "Ainf"; }
+            set { }
+        }
+
+        public override void refresh(HabProperties hps)
+        {
+            base.refresh(hps);
+
+            /////////////////////////////
+            // get damageIncrease
+            /////////////////////////////
+
+            this[damageIncrease] = hps.GetValue(damageIncreaseColumn);
+        }
+
+        public override bool Apply()
+        {
+                unit hero = owner as unit;
+
+                double result = hero.statsDamage.convert_to_double() * this.damageIncrease;
+
+                result = Math.Round(result);
+
+                this[hero.bonus_damage] = (int)result;
+                return true;
+        }
+
+        public override AbilityState AbilityState
+        {
+            get
+            {
+                return abilityState;
+            }
+            set
+            {
+                abilityState = value;
+            }
+        }
+
+        public override bool IsPassive
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public override double StackDataA
+        {
+            get
+            {
+                return damageIncrease;
+            }
+            set
+            {
+                damageIncrease.Value = value;
+            }
+        }
+
+        public override void Stack(DBABILITY a)
+        {
+            this.StackDataA = Math.Max(this.StackDataA, a.StackDataA);
+        }
+    }
+
+
+    public class DBACTIVECHEMICALRAGEABILITY : DBABILITY
+    {
+        protected AbilityState abilityState;
+
+        private string originalUnitCode = null;
+        private string originalUnitCodeColumn = null;
+
+        private string chemicalRageUnitCode = null;
+        private string chemicalRageUnitCodeColumn = null;
+
+        public DBACTIVECHEMICALRAGEABILITY() { }
+        public DBACTIVECHEMICALRAGEABILITY(HabProperties hps)
+            : base(hps)
+        {
+            originalUnitCodeColumn = "Eme1";
+            chemicalRageUnitCodeColumn = "Emeu";
+        }
+
+        public override string codeID
+        {
+            get { return "ANcr"; }
+            set { }
+        }
+
+        public override void refresh(HabProperties hps)
+        {
+            base.refresh(hps);
+
+
+            originalUnitCode = hps.GetValue(originalUnitCodeColumn) as string;
+            chemicalRageUnitCode = hps.GetValue(chemicalRageUnitCodeColumn) as string;
+            //this[originalUnitCode] = hps.GetValue(originalUnitCodeColumn);
+            //this[chemicalRageUnitCode] = hps.GetValue(chemicalRageUnitCodeColumn);
+            /////////////////////////////
+            // get fields
+            /////////////////////////////
+        }
+
+        public override bool Apply()
+        {
+            unit hero = owner as unit;
+
+            if (hero.codeID == originalUnitCode && IsOnCooldown == true)
+            {
+                //morph to cr form
+                unit crunit = new unit(chemicalRageUnitCode);
+                hero.PartialCopyTo(crunit);
+                hero.destroy();
+                Current.player.units.Add(crunit.handle,crunit);
+                Current.unit = crunit;
+                this.SetOwner(crunit);
+            }
+
+            //double result = hero.statsDamage.convert_to_double() * this.damageIncrease;
+
+            //result = Math.Round(result);
+
+            //this[hero.bonus_damage] = (int)result;
+            return true;
+        }
+
+        public override AbilityState AbilityState
+        {
+            get
+            {
+                return abilityState;
+            }
+            set
+            {
+                abilityState = value;
+            }
+        }
+
+        public override bool IsPassive
+        {
+            get
+            {
+                return false;
+            }
+        }
+    }
     #region pragma disable
 #pragma warning restore 660
     #endregion

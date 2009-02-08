@@ -1306,7 +1306,7 @@ namespace DotaHIT.Jass.Native.Types
         {
             if (!refresh) forceNoRefresh++;
 
-            if ((ability.AbilityState & AbilityState.Activated) != 0)
+  //          if ((ability.AbilityState & AbilityState.Activated) != 0)
             {
                 // remove activated state so it wouldnt trigger twice
                 ability.AbilityState ^= AbilityState.Activated;
@@ -2058,7 +2058,18 @@ namespace DotaHIT.Jass.Native.Types
 
                 issued_order(this, e);
             }
-        }        
+        }
+
+        public void PartialCopyTo(unit unit)
+        {
+            unit.Level = Level;
+            unit.heroAbilities = (DBABILITIES) heroAbilities.GetCopy();
+            foreach (DBABILITY ability in heroAbilities)
+                foreach (DBABILITY in unit.heroAbilities)
+            foreach (DBITEMSLOT slot in Inventory)
+                if (slot.Item != null)
+                    unit.Inventory.put_item(slot.Item);
+        }
     }
     public class item : widget
     {

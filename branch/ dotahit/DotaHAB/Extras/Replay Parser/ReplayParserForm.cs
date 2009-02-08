@@ -1291,6 +1291,8 @@ namespace DotaHIT.Extras
 
         void ShowReplayExport(int layoutType)
         {
+            if (hpcExportCfg["HeroTags"] == null)
+                hpcExportCfg["HeroTags"] = new HabProperties();
             currentExportLayout = layoutType;
 
             Team t1;
@@ -1381,7 +1383,9 @@ namespace DotaHIT.Extras
 
         string getHeroTag(string heroID)
         {
-            string tag = hpcExportCfg["HeroTags"].GetStringValue(heroID).Split(';')[0]; //,heroID] as string).Split(';')[0]; 
+            string tag = null;
+//            if (hpcExportCfg["HeroTags"]!=null)
+            tag = hpcExportCfg["HeroTags"].GetStringValue(heroID).Split(';')[0];
 
             return (string.IsNullOrEmpty(tag)) ? ":" + heroID + ":" : tag;
         }
