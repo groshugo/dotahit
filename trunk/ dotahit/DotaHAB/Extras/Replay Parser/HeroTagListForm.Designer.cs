@@ -31,10 +31,11 @@ namespace DotaHIT.Extras
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.heroTagGridView = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             this.heroImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.heroTagColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.heroNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
+            this.HeroSecondNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.heroTagGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +60,8 @@ namespace DotaHIT.Extras
             this.heroTagGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.heroImageColumn,
             this.heroTagColumn,
-            this.heroNameColumn});
+            this.heroNameColumn,
+            this.HeroSecondNameColumn});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -77,11 +79,22 @@ namespace DotaHIT.Extras
             this.heroTagGridView.RowHeadersVisible = false;
             this.heroTagGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.heroTagGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.heroTagGridView.Size = new System.Drawing.Size(292, 235);
+            this.heroTagGridView.Size = new System.Drawing.Size(436, 235);
             this.heroTagGridView.TabIndex = 29;
             this.heroTagGridView.VirtualMode = true;
             this.heroTagGridView.CellValueNeeded += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.heroTagGridView_CellValueNeeded);
             this.heroTagGridView.CellValuePushed += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.heroTagGridView_CellValuePushed);
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label1.Location = new System.Drawing.Point(0, 235);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(436, 31);
+            this.label1.TabIndex = 30;
+            this.label1.Text = "The data you enter here is automatically saved in the special file \'dhrexport.cfg" +
+                "\'";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // heroImageColumn
             // 
@@ -104,26 +117,21 @@ namespace DotaHIT.Extras
             // heroNameColumn
             // 
             this.heroNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.heroNameColumn.HeaderText = "Name";
+            this.heroNameColumn.FillWeight = 60F;
+            this.heroNameColumn.HeaderText = "1st Name";
             this.heroNameColumn.Name = "heroNameColumn";
-            this.heroNameColumn.ReadOnly = true;
             // 
-            // label1
+            // HeroSecondNameColumn
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label1.Location = new System.Drawing.Point(0, 235);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(292, 31);
-            this.label1.TabIndex = 30;
-            this.label1.Text = "The data you enter here is automatically saved in the special file \'dhrexport.cfg" +
-                "\'";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.HeroSecondNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.HeroSecondNameColumn.HeaderText = "2nd Name";
+            this.HeroSecondNameColumn.Name = "HeroSecondNameColumn";
             // 
             // HeroTagListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 266);
+            this.ClientSize = new System.Drawing.Size(436, 266);
             this.Controls.Add(this.heroTagGridView);
             this.Controls.Add(this.label1);
             this.Name = "HeroTagListForm";
@@ -141,7 +149,8 @@ namespace DotaHIT.Extras
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewImageColumn heroImageColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn heroTagColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn heroNameColumn;        
+        private System.Windows.Forms.DataGridViewTextBoxColumn heroNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HeroSecondNameColumn;        
 
     }
 }

@@ -4,9 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
+using System.Threading;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 using DotaHIT.Jass.Types;
 using DotaHIT.Core.Resources;
+using DotaHIT.Jass.Native.Types;
+using DotaHIT.DatabaseModel.Data;
+using DotaHIT.DatabaseModel.DataTypes;
+using DotaHIT.DatabaseModel.Abilities;
+using DotaHIT;
+
 
 namespace Deerchao.War3Share.W3gParser
 {
@@ -27,6 +34,7 @@ namespace Deerchao.War3Share.W3gParser
         private string name;
         private Player host;
         private GameSettings settings;
+        private string mode;
         private readonly List<Team> teams = new List<Team>();
         private readonly List<Player> players = new List<Player>();
         private readonly List<ChatInfo> chats = new List<ChatInfo>();
@@ -36,6 +44,12 @@ namespace Deerchao.War3Share.W3gParser
         internal Dictionary<int, Hero> dcHeroCache = new Dictionary<int, Hero>();
 
         private readonly long size;
+
+        public string GameMode
+        {
+            get { return mode; }
+        }
+
         public long Size
         {
             get { return size; }
@@ -202,8 +216,28 @@ namespace Deerchao.War3Share.W3gParser
 
             // end research sessions for all players
             foreach (Player player in players)
+            if(!player.IsObserver && !player.IsComputer)
+            {
                 player.State.EndResearch();
-
+                player.Hero = SummonHero(player.GetMostUsedHero().Name, player);
+                if (!GetInventoryFromCache(player))
+                    FillUpPlayerInventory(player, true);
+            }
+            Current.player = GetPlayerBySpecialSlot(1).player;
+            Current.player.units.Clear();
+            foreach (Player player in players)
+            if (!player.IsObserver && !player.IsComputer)
+            {
+                player.Hero.Level = player.GetMostUsedHero().Level;
+                foreach (OrderItem skill in player.GetMostUsedHero().Abilities.BuildOrders)
+                    foreach (DBABILITY ability in player.Hero.heroAbilities)
+                        if (skill.Name == ability.Alias)
+                        {
+                            ability.level_up();
+                            break;
+                        }
+                Current.player.units.Add(player.Id, player.Hero);
+            }
             // fix player slots for -sp mode
             this.SpModeFix();
 
@@ -707,11 +741,14 @@ namespace Deerchao.War3Share.W3gParser
                         case 0x60:
                             //unknownA, unknownB
                             reader.ReadInt64();
-                            len = 0;
-                            while (reader.ReadByte() != 0)
-                                len++;
+                            long pos = reader.BaseStream.Position;
+                            string command = ParserUtility.ReadString(reader).ToLower();
+                            if (player.Color == PlayerColor.Blue && time < 15000 && mode == null && command.Length > 2)
+                                if ((command != "-di") && (command != "-hhn"))
+                                    mode = command;
 
-                            prest -= (short)(10 + len);
+                            long delta = reader.BaseStream.Position - pos;
+                            prest -= (short)(10 + delta);
                             break;
                         //esc pressed
                         case 0x61:
@@ -781,6 +818,8 @@ namespace Deerchao.War3Share.W3gParser
                                 case "5":                                    
                                     int slot = int.Parse(missonKey);
                                     Player p = GetPlayerBySlot(slot - 1);
+                                    string stringId = DHJassInt.int2id(value);
+                                    stringId = "";
                                     if (p!=null) p.gameCacheValues[key] = value;                                    
                                     break;                                
                                 case "7":
@@ -995,6 +1034,202 @@ namespace Deerchao.War3Share.W3gParser
             return true;
         }
 
+        bool GetInventoryFromCache(Player p)
+        {
+            int _item;
+            if (!p.gameCacheValues.TryGetValue("8_0",out _item))
+                return false;
+            for (int i = 0; i < 6; i++)
+            {
+                p.gameCacheValues.TryGetValue("8_" + i.ToString(), out _item);
+                if (_item == 0)
+                    continue;
+                item item = new item(_item);
+                item.set_owningPlayer(p.player);
+                p.Hero.Inventory.put_item(item);
+            }
+                return true;
+        }
+
+        bool FillUpPlayerInventory(Player p, bool excludeRecipes)
+        {
+            IRecord item;
+            unit shop = null;
+            Current.player = p.player;
+            Current.unit = p.Hero;
+            String itemID = null;
+            DBINVENTORY Inventory = p.Hero.Inventory;
+
+            Inventory.DisableRefresh();
+            foreach (OrderItem orderitem in p.Items.BuildOrders)
+            {
+                itemID = orderitem.Name;
+                bool isNewVersionItem = DHHELPER.IsNewVersionItem(itemID);
+                foreach (unit shop_ in DHLOOKUP.shops)
+                    if (DHHELPER.IsNewVersionItemShop(shop_))
+                    {
+                        if (shop_.sellunits.Contains(itemID))
+                        {
+                            shop = shop_;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (shop_.sellitems.Contains(itemID))
+                        {
+                            shop = shop_;
+                            break;
+                        }
+                    }
+
+                p.Hero.set_location(shop.get_location());
+
+                item = isNewVersionItem ? (IRecord)new unit(itemID) : (IRecord)new item(itemID);
+
+                item = item.Clone();
+
+                if (isNewVersionItem)
+                {
+                    (item as unit).DoSummon = true;
+                    (item as unit).set_owningPlayer(p.player);
+
+                    shop.OnSell(item as unit); // sell item as unit
+                }
+                else
+                    shop.OnSellItem(item as item, p.Hero);
+
+                Inventory.put_item(item as item);
+
+                //Thread.Sleep(2); // to pass control to item handling script thread
+                //System.Windows.Forms.Application.DoEvents();
+
+                //Drop consumables
+                for (int i = 0; i < Inventory.Capacity-2; i++)
+                {
+                    if (Inventory.itemAt(i) != null)
+                    {
+                        if (Inventory[i].Item.uses != (DBINT)0)
+                        {
+                            Inventory[i].drop_item();
+                            break;
+                        }
+                    }
+                }
+
+                // Shift down after drop
+                for (int i = 0; i < Inventory.Capacity-2; i++)
+                    if (Inventory.itemAt(i) == null && Inventory.itemAt(i + 1) != null)
+                    {
+                        Inventory.swap_items(Inventory[i], Inventory[i + 1]);
+                        p.Hero.OnPickupItem(Inventory[i].Item);
+                    }
+
+                for (int i = 6; i < Inventory.Capacity - 2; i++)
+                { 
+                    int index = FindCheapestItemIndex(Inventory);
+                    if (Inventory[i].Item!=null)
+                        if (Inventory[i].Item.goldCost > Inventory[index].Item.goldCost)
+                        {
+                            Inventory.swap_items(Inventory[i], Inventory[FindCheapestItemIndex(Inventory)]);
+                            p.Hero.OnPickupItem(Inventory[0].Item);
+                        }
+                }
+                System.Windows.Forms.Application.DoEvents();
+            }
+
+            // Shit stuff
+            //for (int i = 6; i < Inventory.Capacity - 2; i++)
+            //{
+            //    if (Inventory[i].Item != null)
+            //    {
+            //        int index = FindMostExpensiveItemIndex(Inventory);
+            //        Inventory.swap_items(Inventory[i], Inventory[index]);
+            //        p.Hero.OnPickupItem(Inventory[0].Item);
+            //        Thread.Sleep(2);
+            //        System.Windows.Forms.Application.DoEvents();
+            //        Inventory.swap_items(Inventory[i], Inventory[index]);
+            //        p.Hero.OnPickupItem(Inventory[0].Item);
+            //        Thread.Sleep(2);
+            //        System.Windows.Forms.Application.DoEvents();
+            //    }
+            //}
+
+            if (excludeRecipes)
+            {
+                foreach (DBITEMSLOT slot in Inventory)
+                    if (slot.Item != null)
+                        if (slot.Item.iconName.Text.ToLower().Contains("snazzyscroll"))
+                            slot.drop_item();
+            }
+
+            Comparison<DBITEMSLOT> UpSorter = delegate(DBITEMSLOT a, DBITEMSLOT b)
+            {
+                return (b.Item != null ? (int)b.Item.goldCost : 0) - (a.Item != null ? (int)a.Item.goldCost : 0);
+            };
+
+            List<DBITEMSLOT> range = Inventory.GetRange(6, Inventory.Capacity - 10);
+            range.Sort(UpSorter);
+            Inventory.RemoveRange(6, Inventory.Capacity - 10);
+            Inventory.InsertRange(6, range);
+
+            // Final Shift down
+            for (int j = 0; j < 5; j++ )
+                for (int i = 0; i < Inventory.Capacity - 2; i++)
+                {
+                    if (Inventory.itemAt(i) == null && Inventory.itemAt(i + 1) != null)
+                    {
+                        Inventory.swap_items(Inventory[i], Inventory[i + 1]);
+                        p.Hero.OnPickupItem(Inventory[i].Item);
+                    }
+                }
+
+            // Move some items to the backpack, and set capacity to 10
+            for (int i = 0; i < 4; i++ )
+            {
+                Inventory.swap_items(Inventory[6+i],Inventory[Inventory.Capacity-4+i]);
+            }
+            Inventory.RemoveRange(6, Inventory.Capacity - 10);
+
+            Inventory.EnableRefresh();
+            return true;
+        }
+        
+
+        int GetLastItemIndex(DBINVENTORY inventory)
+        {
+            for (int i = 0; i < inventory.Capacity - 2; i++)
+                if (inventory[i].Item != null && inventory[i + 1] == null && inventory[i + 2] == null)
+                    return i;
+            return 0;
+        }
+
+        int FindMostExpensiveItemIndex(DBINVENTORY inventory)
+        {
+            int cost = 0, index = 0;
+            for (int i = 0; i < 6; i++)
+                if (inventory[i].Item != null)
+                    if (inventory[i].Item.goldCost >= cost)
+                    {
+                        cost = inventory[i].Item.goldCost;
+                        index = i;
+                    }
+            return index;
+        }
+
+        int FindCheapestItemIndex(DBINVENTORY inventory)
+        {
+            int cost=10000, index=0;
+            for(int i=0;i<6;i++)
+                if (inventory[i].Item!=null)
+                if (inventory[i].Item.goldCost < cost)
+                {
+                    cost = inventory[i].Item.goldCost;
+                    index = i;
+                }
+            return index;
+        }
+
         bool TryFindHeroByCache(List<int> unitList, out Hero hero)
         {
             foreach (int objectID in unitList)
@@ -1032,9 +1267,8 @@ namespace Deerchao.War3Share.W3gParser
                 {
                     // get name of currently selected hero
                     string heroName = hero.Name;
-
-                    // find hero that is owned by this player
-                    // and has same name as the hero currently selected
+ 	                    // find hero that is owned by this player
+ 	                    // and has same name as the hero currently selected
                     Hero playerHero = player.Heroes[heroName];
 
                     // if this player does not own hero with specified name
@@ -1048,7 +1282,7 @@ namespace Deerchao.War3Share.W3gParser
                         player.Heroes.Order(playerHero, time);
                     }
                     else // if this player does have a hero with same name as the selected hero,
-                        // then use the player's own hero
+                         // then use the player's own hero
                         hero = playerHero;
 
                     // assign object id to this hero
@@ -1059,12 +1293,12 @@ namespace Deerchao.War3Share.W3gParser
                     // will reference the hero object that this player owns.
                     dcHeroCache[objectId1] = hero;
                 }
-                else                
+                else
                     // if this hero has been already used by someone,
                     // check if this player doesnt have any hero,
                     // in which case add this hero to him (players probably used -swap command)
                     if (player.Heroes.Count == 0)
-                        player.Heroes.Order(hero, time);                
+                        player.Heroes.Order(hero, time);
 
                 IncreaseHeroUseCount(player, hero);
 
@@ -1530,7 +1764,42 @@ namespace Deerchao.War3Share.W3gParser
                 if (HeaderString[i] != (char)header[i])
                     throw new W3gParserException("指定的文件不是合法的Warcraft III Replay文件。");
             }
-        }        
+        }
+
+        private unit SummonHero(string StringId, Player p)
+        {
+            //code based on SellHero proc in HeroListForm.cs
+            Current.player = p.player;
+            unit sellingTavern = null;
+            unit hero = null;
+
+            // find the tavern that sold this hero
+
+            string tavernID = DHLOOKUP.dcHeroesTaverns[StringId];
+            foreach (unit tavern in DHLOOKUP.taverns)
+                if (tavern.ID == tavernID)
+                {
+                    sellingTavern = tavern;
+                    break;
+                }
+
+            // create new hero
+
+            hero = new unit(StringId, p.Items.BuildOrders.Count > 6 ? p.Items.BuildOrders.Count : 6);
+            hero.DoSummon = true;
+//            hero.set_owningPlayer(p.player, 0, 0); //!
+            if (hero.get_owningPlayer()!= null) hero.get_owningPlayer().remove_unit(hero);
+
+            p.player.add_unit(hero);
+
+            hero.set_owningPlayer(p.player);
+
+            // only new heroes process onsell event
+
+            sellingTavern.OnSell(hero);
+            Current.unit = hero;
+            return hero;
+        }
     }
 
     public delegate void MapRequiredEventHandler(object sender, EventArgs e);                

@@ -929,23 +929,25 @@ namespace DotaHIT.Extras
             infoLV.Items[2].SubItems[1].Text = Path.GetDirectoryName(rp.Map.Path);
             // host name
             infoLV.Items[3].SubItems[1].Text = rp.Host.Name;
+            // game mode
+            infoLV.Items[4].SubItems[1].Text = rp.GameMode;
             // game length
-            infoLV.Items[4].SubItems[1].Text = DHFormatter.ToString(rp.GameLength);
+            infoLV.Items[5].SubItems[1].Text = DHFormatter.ToString(rp.GameLength);
             // sentinel players
-            infoLV.Items[5].SubItems[1].Text = rp.GetTeamByType(TeamType.Sentinel).Players.Count.ToString();
+            infoLV.Items[6].SubItems[1].Text = rp.GetTeamByType(TeamType.Sentinel).Players.Count.ToString();
             // scourge players
-            infoLV.Items[6].SubItems[1].Text = rp.GetTeamByType(TeamType.Scourge).Players.Count.ToString();
+            infoLV.Items[7].SubItems[1].Text = rp.GetTeamByType(TeamType.Scourge).Players.Count.ToString();
             // winner
             string winner = "Winner info not found";
-            infoLV.Items[7].SubItems[1].ForeColor = Color.Black;
+            infoLV.Items[8].SubItems[1].ForeColor = Color.Black;
             foreach (Team t in rp.Teams)
                 if (t.IsWinner)
                 {
                     winner = t.Type.ToString();
-                    infoLV.Items[7].SubItems[1].ForeColor = (t.Type == TeamType.Sentinel) ? Color.Red : Color.Green;
+                    infoLV.Items[8].SubItems[1].ForeColor = (t.Type == TeamType.Sentinel) ? Color.Red : Color.Green;
                     break;
                 }
-            infoLV.Items[7].SubItems[1].Text = winner;
+            infoLV.Items[8].SubItems[1].Text = winner;
         }
 
         protected void DisplayChat(Replay replay)
@@ -1289,6 +1291,8 @@ namespace DotaHIT.Extras
 
         void ShowReplayExport(int layoutType)
         {
+            if (hpcExportCfg["HeroTags"] == null)
+                hpcExportCfg["HeroTags"] = new HabProperties();
             currentExportLayout = layoutType;
 
             Team t1;
@@ -1351,9 +1355,37 @@ namespace DotaHIT.Extras
 
             UIRichText.Default.ClearText();
         }
+
+        string getHeroNames(string heroID, int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    int length = hpcExportCfg["HeroTags"].GetStringValue(heroID).Split(';').Length;
+                    if (length < 2)
+                        return DHLOOKUP.hpcUnitProfiles[heroID].GetStringValue("Propernames").Split(',')[0];
+                    else
+                        return hpcExportCfg["HeroTags"].GetStringValue(heroID).Split(';')[1];
+                case 1:
+                    int len = hpcExportCfg["HeroTags"].GetStringValue(heroID).Split(';').Length;
+                    if (len < 3)
+                        return DHLOOKUP.hpcUnitProfiles[heroID].GetStringValue("Name").Trim('"');
+                    else
+                        return hpcExportCfg["HeroTags"].GetStringValue(heroID).Split(';')[2];
+                case 2:
+                    return getHeroNames(heroID, 0) + " " + getHeroNames(heroID, 1);
+                case 3:
+                    return getHeroNames(heroID, 0) + " The " + getHeroNames(heroID, 1);
+
+            }
+            return string.Empty;
+        }
+
         string getHeroTag(string heroID)
         {
-            string tag = hpcExportCfg["HeroTags",heroID] as string; 
+            string tag = null;
+//            if (hpcExportCfg["HeroTags"]!=null)
+            tag = hpcExportCfg["HeroTags"].GetStringValue(heroID).Split(';')[0];
 
             return (string.IsNullOrEmpty(tag)) ? ":" + heroID + ":" : tag;
         }
@@ -1451,6 +1483,10 @@ namespace DotaHIT.Extras
                     dcUsedHeroTags[tag] = h.Name;
 
                     UIRichText.Default.AddText(tag);
+
+                    if (includeNamesCB.Checked && namesCmbB.SelectedIndex != -1)
+                        UIRichText.Default.AddText(" " + getHeroNames(h.Name, namesCmbB.SelectedIndex));
+
                     UIRichText.Default.AddText(" " + p.Name);
                     if (vertical) UIRichText.Default.AddText("(" + getLaneName(lineUp) + ")");                    
                 }

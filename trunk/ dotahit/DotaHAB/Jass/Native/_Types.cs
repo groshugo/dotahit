@@ -1073,7 +1073,8 @@ namespace DotaHIT.Jass.Native.Types
 
         protected int hpPerStr = 19;
         protected int manaPerInt = 13;
-        protected double armorPerAgi = 0.14;//(double)((double)1 / (double)7);                    
+        protected double armorPerAgi = 0.14;//(double)((double)1 / (double)7);  
+        public int forceInventorySize = 0; //!          
         #endregion
 
         protected unit(bool thisIsForDbUnitsKnowledge) { }
@@ -1096,6 +1097,15 @@ namespace DotaHIT.Jass.Native.Types
         public unit(string codeID)
         {
             this[this.codeID] = codeID;
+            ApplyPropsByID(codeID);
+
+            Prepare();
+        }
+
+        public unit(string codeID, int forceInventorySize) //!
+        {
+            this[this.codeID] = codeID;
+            this.forceInventorySize = forceInventorySize;
             ApplyPropsByID(codeID);
 
             Prepare();
@@ -1154,6 +1164,9 @@ namespace DotaHIT.Jass.Native.Types
         protected void Prepare()
         {
             foreach (DBABILITY a in abilities)
+            {
+ //               if (a.Alias == "AInv")
+ //                   (a as DBINVENTORYABILITY).MetaProps["inv1"] = 20;
                 if (String.IsNullOrEmpty(a[0, "reqLevel"] as string))
                 {
                     a.Level = 1;
@@ -1161,6 +1174,7 @@ namespace DotaHIT.Jass.Native.Types
                     //HabProperties hps = a.GetProps(true);
                     //this.ApplyPropsBySubstitute(hps);
                 }
+            }
 
             baseHeroAbilList.Clear();
             foreach (DBABILITY a in heroAbilities)
@@ -2044,7 +2058,22 @@ namespace DotaHIT.Jass.Native.Types
 
                 issued_order(this, e);
             }
-        }        
+        }
+
+        public void PartialCopyTo(unit unit)
+        {
+            unit.Level = Level;
+            foreach (DBABILITY sourceAbility in heroAbilities)
+                foreach (DBABILITY targetAbility in unit.heroAbilities)
+                    if (sourceAbility.Alias == targetAbility.Alias)
+                    {
+                        targetAbility.Level = sourceAbility.Level;
+                        break;
+                    }
+            foreach (DBITEMSLOT slot in Inventory)
+                if (slot.Item != null)
+                    unit.Inventory.put_item(slot.Item, slot.Index);
+        }
     }
     public class item : widget
     {

@@ -43,15 +43,18 @@ namespace DotaHIT.Extras
             "Host Name",
             "MYM^S1rro"}, -1);
             System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Game Mode",
+            "-ap"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             "Game Length",
             "1:56:43"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
             "Sentinel Players",
             "5"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
             "Scourge Players",
             "5"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new System.Windows.Forms.ListViewItem.ListViewSubItem[] {
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new System.Windows.Forms.ListViewItem.ListViewSubItem[] {
             new System.Windows.Forms.ListViewItem.ListViewSubItem(null, "Winner", System.Drawing.SystemColors.WindowText, System.Drawing.Color.Ivory, new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)))),
             new System.Windows.Forms.ListViewItem.ListViewSubItem(null, "Sentinel", System.Drawing.SystemColors.WindowText, System.Drawing.Color.Ivory, new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204))))}, -1);
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -97,17 +100,19 @@ namespace DotaHIT.Extras
             this.creepKDColumn = new System.Windows.Forms.ColumnHeader();
             this.wardsColumn = new System.Windows.Forms.ColumnHeader();
             this.exportTabPage = new System.Windows.Forms.TabPage();
+            this.namesCmbB = new System.Windows.Forms.ComboBox();
+            this.includeNamesCB = new System.Windows.Forms.CheckBox();
             this.chooseFontB = new System.Windows.Forms.Button();
             this.fontTextBox = new System.Windows.Forms.TextBox();
             this.layoutCmbB = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.shortLaneNamesCB = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.exportIconWidthNumUD = new System.Windows.Forms.NumericUpDown();
             this.exportPreviewB = new System.Windows.Forms.CheckBox();
             this.heroTagB = new System.Windows.Forms.Button();
             this.replayExportRTB = new System.Windows.Forms.RichTextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
             this.openBuildsInFormLL = new System.Windows.Forms.LinkLabel();
             this.closeReplayB = new System.Windows.Forms.Button();
@@ -210,7 +215,7 @@ namespace DotaHIT.Extras
             this.tabControl.Location = new System.Drawing.Point(-4, -22);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(877, 493);
+            this.tabControl.Size = new System.Drawing.Size(877, 541);
             this.tabControl.TabIndex = 1;
             // 
             // browseTabPage
@@ -221,7 +226,7 @@ namespace DotaHIT.Extras
             this.browseTabPage.Controls.Add(this.browserMenu);
             this.browseTabPage.Location = new System.Drawing.Point(4, 22);
             this.browseTabPage.Name = "browseTabPage";
-            this.browseTabPage.Size = new System.Drawing.Size(869, 467);
+            this.browseTabPage.Size = new System.Drawing.Size(869, 515);
             this.browseTabPage.TabIndex = 0;
             this.browseTabPage.UseVisualStyleBackColor = true;
             // 
@@ -239,11 +244,11 @@ namespace DotaHIT.Extras
             this.browser.ShowExplorer = true;
             this.browser.ShowStatusBar = false;
             this.browser.ShowWar3ReplayShortCut = true;
-            this.browser.Size = new System.Drawing.Size(869, 320);
+            this.browser.Size = new System.Drawing.Size(869, 368);
             this.browser.TabIndex = 8;
+            this.browser.SelectedPathChanged += new System.EventHandler(this.browser_SelectedPathChanged);
             this.browser.SelectedItemsChanged += new DotaHIT.Extras.FileBrowser.SelectedItemsChangedEventHandler(this.browser_SelectedItemsChanged);
             this.browser.FileOk += new System.ComponentModel.CancelEventHandler(this.browser_FileOk);
-            this.browser.SelectedPathChanged += new System.EventHandler(this.browser_SelectedPathChanged);
             // 
             // fixedSplitter
             // 
@@ -487,7 +492,7 @@ namespace DotaHIT.Extras
             // replayFinderToolStripMenuItem
             // 
             this.replayFinderToolStripMenuItem.Name = "replayFinderToolStripMenuItem";
-            this.replayFinderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.replayFinderToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.replayFinderToolStripMenuItem.Text = "Replay Finder";
             this.replayFinderToolStripMenuItem.Click += new System.EventHandler(this.replayFinderToolStripMenuItem_Click);
             // 
@@ -499,7 +504,7 @@ namespace DotaHIT.Extras
             this.parseTabPage.Location = new System.Drawing.Point(4, 22);
             this.parseTabPage.Name = "parseTabPage";
             this.parseTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.parseTabPage.Size = new System.Drawing.Size(869, 467);
+            this.parseTabPage.Size = new System.Drawing.Size(869, 515);
             this.parseTabPage.TabIndex = 1;
             this.parseTabPage.UseVisualStyleBackColor = true;
             // 
@@ -510,7 +515,7 @@ namespace DotaHIT.Extras
             this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel13.Location = new System.Drawing.Point(263, 3);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(603, 461);
+            this.panel13.Size = new System.Drawing.Size(603, 509);
             this.panel13.TabIndex = 8;
             // 
             // panel15
@@ -521,7 +526,7 @@ namespace DotaHIT.Extras
             this.panel15.Location = new System.Drawing.Point(0, 258);
             this.panel15.Name = "panel15";
             this.panel15.Padding = new System.Windows.Forms.Padding(6, 6, 6, 0);
-            this.panel15.Size = new System.Drawing.Size(603, 203);
+            this.panel15.Size = new System.Drawing.Size(603, 251);
             this.panel15.TabIndex = 9;
             // 
             // replayTabControl
@@ -535,7 +540,7 @@ namespace DotaHIT.Extras
             this.replayTabControl.Name = "replayTabControl";
             this.replayTabControl.SelectedIndex = 0;
             this.replayTabControl.ShowToolTips = true;
-            this.replayTabControl.Size = new System.Drawing.Size(591, 197);
+            this.replayTabControl.Size = new System.Drawing.Size(591, 245);
             this.replayTabControl.TabIndex = 8;
             this.replayTabControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.replayTabControl_MouseUp);
             // 
@@ -545,7 +550,7 @@ namespace DotaHIT.Extras
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(583, 171);
+            this.tabPage1.Size = new System.Drawing.Size(583, 219);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Chat Log";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -558,7 +563,7 @@ namespace DotaHIT.Extras
             this.chatlogRTB.Location = new System.Drawing.Point(3, 3);
             this.chatlogRTB.Name = "chatlogRTB";
             this.chatlogRTB.ReadOnly = true;
-            this.chatlogRTB.Size = new System.Drawing.Size(577, 165);
+            this.chatlogRTB.Size = new System.Drawing.Size(577, 213);
             this.chatlogRTB.TabIndex = 7;
             this.chatlogRTB.Text = "";
             // 
@@ -568,7 +573,7 @@ namespace DotaHIT.Extras
             this.killLogTabPage.Location = new System.Drawing.Point(4, 22);
             this.killLogTabPage.Name = "killLogTabPage";
             this.killLogTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.killLogTabPage.Size = new System.Drawing.Size(583, 171);
+            this.killLogTabPage.Size = new System.Drawing.Size(583, 219);
             this.killLogTabPage.TabIndex = 3;
             this.killLogTabPage.Text = "Kill Log";
             this.killLogTabPage.UseVisualStyleBackColor = true;
@@ -581,7 +586,7 @@ namespace DotaHIT.Extras
             this.killLogRTB.Location = new System.Drawing.Point(3, 3);
             this.killLogRTB.Name = "killLogRTB";
             this.killLogRTB.ReadOnly = true;
-            this.killLogRTB.Size = new System.Drawing.Size(577, 165);
+            this.killLogRTB.Size = new System.Drawing.Size(577, 213);
             this.killLogRTB.TabIndex = 8;
             this.killLogRTB.Text = "";
             // 
@@ -591,7 +596,7 @@ namespace DotaHIT.Extras
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(583, 171);
+            this.tabPage2.Size = new System.Drawing.Size(583, 219);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Game Statistics";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -615,7 +620,7 @@ namespace DotaHIT.Extras
             this.statisticsLV.Location = new System.Drawing.Point(3, 3);
             this.statisticsLV.MultiSelect = false;
             this.statisticsLV.Name = "statisticsLV";
-            this.statisticsLV.Size = new System.Drawing.Size(577, 165);
+            this.statisticsLV.Size = new System.Drawing.Size(577, 213);
             this.statisticsLV.TabIndex = 0;
             this.statisticsLV.UseCompatibleStateImageBehavior = false;
             this.statisticsLV.View = System.Windows.Forms.View.Details;
@@ -664,29 +669,58 @@ namespace DotaHIT.Extras
             // exportTabPage
             // 
             this.exportTabPage.BackColor = System.Drawing.Color.White;
+            this.exportTabPage.Controls.Add(this.namesCmbB);
+            this.exportTabPage.Controls.Add(this.includeNamesCB);
             this.exportTabPage.Controls.Add(this.chooseFontB);
             this.exportTabPage.Controls.Add(this.fontTextBox);
             this.exportTabPage.Controls.Add(this.layoutCmbB);
             this.exportTabPage.Controls.Add(this.label10);
-            this.exportTabPage.Controls.Add(this.label9);
             this.exportTabPage.Controls.Add(this.shortLaneNamesCB);
             this.exportTabPage.Controls.Add(this.label5);
             this.exportTabPage.Controls.Add(this.exportIconWidthNumUD);
             this.exportTabPage.Controls.Add(this.exportPreviewB);
             this.exportTabPage.Controls.Add(this.heroTagB);
             this.exportTabPage.Controls.Add(this.replayExportRTB);
+            this.exportTabPage.Controls.Add(this.label9);
             this.exportTabPage.Location = new System.Drawing.Point(4, 22);
             this.exportTabPage.Name = "exportTabPage";
             this.exportTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.exportTabPage.Size = new System.Drawing.Size(583, 171);
+            this.exportTabPage.Size = new System.Drawing.Size(583, 219);
             this.exportTabPage.TabIndex = 2;
             this.exportTabPage.Text = "Export";
             this.exportTabPage.UseVisualStyleBackColor = true;
             // 
+            // namesCmbB
+            // 
+            this.namesCmbB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.namesCmbB.Enabled = false;
+            this.namesCmbB.FormattingEnabled = true;
+            this.namesCmbB.Items.AddRange(new object[] {
+            "1st Name",
+            "2nd Name",
+            "1st + 2nd",
+            "1st + The + 2nd"});
+            this.namesCmbB.Location = new System.Drawing.Point(467, 132);
+            this.namesCmbB.Name = "namesCmbB";
+            this.namesCmbB.Size = new System.Drawing.Size(110, 21);
+            this.namesCmbB.TabIndex = 13;
+            this.namesCmbB.SelectedIndexChanged += new System.EventHandler(this.namesCmbB_SelectedIndexChanged);
+            // 
+            // includeNamesCB
+            // 
+            this.includeNamesCB.AutoSize = true;
+            this.includeNamesCB.Location = new System.Drawing.Point(467, 109);
+            this.includeNamesCB.Name = "includeNamesCB";
+            this.includeNamesCB.Size = new System.Drawing.Size(85, 17);
+            this.includeNamesCB.TabIndex = 12;
+            this.includeNamesCB.Text = "Hero Names";
+            this.includeNamesCB.UseVisualStyleBackColor = true;
+            this.includeNamesCB.CheckedChanged += new System.EventHandler(this.includeNamesCB_CheckedChanged);
+            // 
             // chooseFontB
             // 
             this.chooseFontB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chooseFontB.Location = new System.Drawing.Point(561, 39);
+            this.chooseFontB.Location = new System.Drawing.Point(558, 31);
             this.chooseFontB.Name = "chooseFontB";
             this.chooseFontB.Size = new System.Drawing.Size(19, 23);
             this.chooseFontB.TabIndex = 11;
@@ -698,7 +732,7 @@ namespace DotaHIT.Extras
             // 
             this.fontTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.fontTextBox.BackColor = System.Drawing.Color.White;
-            this.fontTextBox.Location = new System.Drawing.Point(502, 41);
+            this.fontTextBox.Location = new System.Drawing.Point(499, 33);
             this.fontTextBox.Name = "fontTextBox";
             this.fontTextBox.ReadOnly = true;
             this.fontTextBox.Size = new System.Drawing.Size(59, 20);
@@ -712,7 +746,7 @@ namespace DotaHIT.Extras
             this.layoutCmbB.Items.AddRange(new object[] {
             "Vertical",
             "Horizontal"});
-            this.layoutCmbB.Location = new System.Drawing.Point(502, 13);
+            this.layoutCmbB.Location = new System.Drawing.Point(501, 7);
             this.layoutCmbB.Name = "layoutCmbB";
             this.layoutCmbB.Size = new System.Drawing.Size(76, 21);
             this.layoutCmbB.TabIndex = 7;
@@ -722,27 +756,17 @@ namespace DotaHIT.Extras
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(471, 44);
+            this.label10.Location = new System.Drawing.Point(468, 36);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(28, 13);
             this.label10.TabIndex = 9;
             this.label10.Text = "Font";
             // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(463, 17);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 13);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "Layout";
-            // 
             // shortLaneNamesCB
             // 
             this.shortLaneNamesCB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.shortLaneNamesCB.AutoSize = true;
-            this.shortLaneNamesCB.Location = new System.Drawing.Point(474, 69);
+            this.shortLaneNamesCB.Location = new System.Drawing.Point(474, 60);
             this.shortLaneNamesCB.Name = "shortLaneNamesCB";
             this.shortLaneNamesCB.Size = new System.Drawing.Size(106, 17);
             this.shortLaneNamesCB.TabIndex = 6;
@@ -754,7 +778,7 @@ namespace DotaHIT.Extras
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(469, 93);
+            this.label5.Location = new System.Drawing.Point(469, 86);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 13);
             this.label5.TabIndex = 5;
@@ -768,7 +792,7 @@ namespace DotaHIT.Extras
             0,
             0,
             0});
-            this.exportIconWidthNumUD.Location = new System.Drawing.Point(528, 90);
+            this.exportIconWidthNumUD.Location = new System.Drawing.Point(528, 83);
             this.exportIconWidthNumUD.Maximum = new decimal(new int[] {
             64,
             0,
@@ -793,7 +817,7 @@ namespace DotaHIT.Extras
             // 
             this.exportPreviewB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.exportPreviewB.Appearance = System.Windows.Forms.Appearance.Button;
-            this.exportPreviewB.Location = new System.Drawing.Point(469, 113);
+            this.exportPreviewB.Location = new System.Drawing.Point(467, 160);
             this.exportPreviewB.Name = "exportPreviewB";
             this.exportPreviewB.Size = new System.Drawing.Size(108, 24);
             this.exportPreviewB.TabIndex = 3;
@@ -805,7 +829,7 @@ namespace DotaHIT.Extras
             // heroTagB
             // 
             this.heroTagB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.heroTagB.Location = new System.Drawing.Point(469, 142);
+            this.heroTagB.Location = new System.Drawing.Point(467, 190);
             this.heroTagB.Name = "heroTagB";
             this.heroTagB.Size = new System.Drawing.Size(108, 23);
             this.heroTagB.TabIndex = 2;
@@ -823,10 +847,20 @@ namespace DotaHIT.Extras
             this.replayExportRTB.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.replayExportRTB.Location = new System.Drawing.Point(3, 6);
             this.replayExportRTB.Name = "replayExportRTB";
-            this.replayExportRTB.Size = new System.Drawing.Size(460, 159);
+            this.replayExportRTB.Size = new System.Drawing.Size(459, 207);
             this.replayExportRTB.TabIndex = 0;
             this.replayExportRTB.Text = "select layout first";
             this.replayExportRTB.WordWrap = false;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(460, 10);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(39, 13);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Layout";
             // 
             // panel12
             // 
@@ -1129,7 +1163,7 @@ namespace DotaHIT.Extras
             this.panel14.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel14.Location = new System.Drawing.Point(3, 3);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(260, 461);
+            this.panel14.Size = new System.Drawing.Size(260, 509);
             this.panel14.TabIndex = 8;
             // 
             // infoLV
@@ -1153,7 +1187,8 @@ namespace DotaHIT.Extras
             listViewItem6.Group = listViewGroup1;
             listViewItem7.Group = listViewGroup1;
             listViewItem8.Group = listViewGroup1;
-            listViewItem8.UseItemStyleForSubItems = false;
+            listViewItem9.Group = listViewGroup1;
+            listViewItem9.UseItemStyleForSubItems = false;
             this.infoLV.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
             listViewItem2,
@@ -1162,13 +1197,14 @@ namespace DotaHIT.Extras
             listViewItem5,
             listViewItem6,
             listViewItem7,
-            listViewItem8});
+            listViewItem8,
+            listViewItem9});
             this.infoLV.Location = new System.Drawing.Point(0, 260);
             this.infoLV.MultiSelect = false;
             this.infoLV.Name = "infoLV";
             this.infoLV.Scrollable = false;
             this.infoLV.ShowItemToolTips = true;
-            this.infoLV.Size = new System.Drawing.Size(260, 201);
+            this.infoLV.Size = new System.Drawing.Size(260, 249);
             this.infoLV.TabIndex = 0;
             this.infoLV.UseCompatibleStateImageBehavior = false;
             this.infoLV.View = System.Windows.Forms.View.Details;
@@ -1598,7 +1634,7 @@ namespace DotaHIT.Extras
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.ClientSize = new System.Drawing.Size(869, 467);
+            this.ClientSize = new System.Drawing.Size(869, 515);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.browserMenu;
@@ -1767,6 +1803,8 @@ namespace DotaHIT.Extras
         private System.Windows.Forms.ToolStripMenuItem parseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem extractToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem replayFinderToolStripMenuItem;        
+        private System.Windows.Forms.ToolStripMenuItem replayFinderToolStripMenuItem;
+        private System.Windows.Forms.ComboBox namesCmbB;
+        private System.Windows.Forms.CheckBox includeNamesCB;        
     }
 }
