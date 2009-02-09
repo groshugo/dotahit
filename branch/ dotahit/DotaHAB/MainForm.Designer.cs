@@ -214,8 +214,8 @@ namespace DotaHIT
             this.battleB.Tag = "2";
             this.battleB.UseVisualStyleBackColor = false;
             this.battleB.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.battleB.Click += new System.EventHandler(this.batlleB_Click);
             this.battleB.MouseMove += new System.Windows.Forms.MouseEventHandler(this.switch_MouseMove);
+            this.battleB.Click += new System.EventHandler(this.batlleB_Click);
             // 
             // sightB
             // 
@@ -231,8 +231,8 @@ namespace DotaHIT
             this.sightB.Tag = "1";
             this.sightB.UseVisualStyleBackColor = false;
             this.sightB.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.sightB.Click += new System.EventHandler(this.sightB_Click);
             this.sightB.MouseMove += new System.Windows.Forms.MouseEventHandler(this.switch_MouseMove);
+            this.sightB.Click += new System.EventHandler(this.sightB_Click);
             // 
             // radarB
             // 
@@ -249,8 +249,8 @@ namespace DotaHIT
             this.radarB.Tag = "0";
             this.radarB.UseVisualStyleBackColor = false;
             this.radarB.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.radarB.Click += new System.EventHandler(this.radarB_Click);
             this.radarB.MouseMove += new System.Windows.Forms.MouseEventHandler(this.switch_MouseMove);
+            this.radarB.Click += new System.EventHandler(this.radarB_Click);
             // 
             // heroInfoRTB
             // 
@@ -331,9 +331,9 @@ namespace DotaHIT
             this.researchB.Size = new System.Drawing.Size(48, 48);
             this.researchB.TabIndex = 30;
             this.researchB.UseVisualStyleBackColor = false;
-            this.researchB.Enter += new System.EventHandler(this.item_Enter);
             this.researchB.Click += new System.EventHandler(this.researchB_Click);
             this.researchB.MouseDown += new System.Windows.Forms.MouseEventHandler(this.researchB_MouseDown);
+            this.researchB.Enter += new System.EventHandler(this.item_Enter);
             // 
             // skill_4B
             // 
@@ -350,11 +350,11 @@ namespace DotaHIT
             this.skill_4B.TabIndex = 29;
             this.skill_4B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.skill_4B.UseVisualStyleBackColor = false;
-            this.skill_4B.Enter += new System.EventHandler(this.item_Enter);
             this.skill_4B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.skill_4B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.skill_MouseDown);
-            this.skill_4B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.skill_MouseMove);
             this.skill_4B.Paint += new System.Windows.Forms.PaintEventHandler(this.skill_Paint);
+            this.skill_4B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.skill_MouseMove);
+            this.skill_4B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.skill_MouseDown);
+            this.skill_4B.Enter += new System.EventHandler(this.item_Enter);
             // 
             // skill_6B
             // 
@@ -371,11 +371,11 @@ namespace DotaHIT
             this.skill_6B.TabIndex = 28;
             this.skill_6B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.skill_6B.UseVisualStyleBackColor = false;
-            this.skill_6B.Enter += new System.EventHandler(this.item_Enter);
             this.skill_6B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.skill_6B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.skill_MouseDown);
-            this.skill_6B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.skill_MouseMove);
             this.skill_6B.Paint += new System.Windows.Forms.PaintEventHandler(this.skill_Paint);
+            this.skill_6B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.skill_MouseMove);
+            this.skill_6B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.skill_MouseDown);
+            this.skill_6B.Enter += new System.EventHandler(this.item_Enter);
             // 
             // skill_5B
             // 
@@ -392,11 +392,11 @@ namespace DotaHIT
             this.skill_5B.TabIndex = 27;
             this.skill_5B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.skill_5B.UseVisualStyleBackColor = false;
-            this.skill_5B.Enter += new System.EventHandler(this.item_Enter);
             this.skill_5B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.skill_5B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.skill_MouseDown);
-            this.skill_5B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.skill_MouseMove);
             this.skill_5B.Paint += new System.Windows.Forms.PaintEventHandler(this.skill_Paint);
+            this.skill_5B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.skill_MouseMove);
+            this.skill_5B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.skill_MouseDown);
+            this.skill_5B.Enter += new System.EventHandler(this.item_Enter);
             // 
             // backpackPanel
             // 
@@ -431,12 +431,12 @@ namespace DotaHIT
             this.item_bp_1B.TabIndex = 26;
             this.item_bp_1B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.item_bp_1B.UseVisualStyleBackColor = false;
-            this.item_bp_1B.Enter += new System.EventHandler(this.item_Enter);
             this.item_bp_1B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
             this.item_bp_1B.DragOver += new System.Windows.Forms.DragEventHandler(this.item_DragOver);
-            this.item_bp_1B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bp_item_MouseDown);
             this.item_bp_1B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.item_MouseMove);
             this.item_bp_1B.DragDrop += new System.Windows.Forms.DragEventHandler(this.item_DragDrop);
+            this.item_bp_1B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bp_item_MouseDown);
+            this.item_bp_1B.Enter += new System.EventHandler(this.item_Enter);
             // 
             // item_bp_4B
             // 
@@ -459,12 +459,12 @@ namespace DotaHIT
             this.item_bp_4B.TabIndex = 29;
             this.item_bp_4B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.item_bp_4B.UseVisualStyleBackColor = false;
-            this.item_bp_4B.Enter += new System.EventHandler(this.item_Enter);
             this.item_bp_4B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
             this.item_bp_4B.DragOver += new System.Windows.Forms.DragEventHandler(this.item_DragOver);
-            this.item_bp_4B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bp_item_MouseDown);
             this.item_bp_4B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.item_MouseMove);
             this.item_bp_4B.DragDrop += new System.Windows.Forms.DragEventHandler(this.item_DragDrop);
+            this.item_bp_4B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bp_item_MouseDown);
+            this.item_bp_4B.Enter += new System.EventHandler(this.item_Enter);
             // 
             // item_bp_2B
             // 
@@ -487,12 +487,12 @@ namespace DotaHIT
             this.item_bp_2B.TabIndex = 27;
             this.item_bp_2B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.item_bp_2B.UseVisualStyleBackColor = false;
-            this.item_bp_2B.Enter += new System.EventHandler(this.item_Enter);
             this.item_bp_2B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
             this.item_bp_2B.DragOver += new System.Windows.Forms.DragEventHandler(this.item_DragOver);
-            this.item_bp_2B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bp_item_MouseDown);
             this.item_bp_2B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.item_MouseMove);
             this.item_bp_2B.DragDrop += new System.Windows.Forms.DragEventHandler(this.item_DragDrop);
+            this.item_bp_2B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bp_item_MouseDown);
+            this.item_bp_2B.Enter += new System.EventHandler(this.item_Enter);
             // 
             // item_bp_3B
             // 
@@ -515,12 +515,12 @@ namespace DotaHIT
             this.item_bp_3B.TabIndex = 28;
             this.item_bp_3B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.item_bp_3B.UseVisualStyleBackColor = false;
-            this.item_bp_3B.Enter += new System.EventHandler(this.item_Enter);
             this.item_bp_3B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
             this.item_bp_3B.DragOver += new System.Windows.Forms.DragEventHandler(this.item_DragOver);
-            this.item_bp_3B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bp_item_MouseDown);
             this.item_bp_3B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.item_MouseMove);
             this.item_bp_3B.DragDrop += new System.Windows.Forms.DragEventHandler(this.item_DragDrop);
+            this.item_bp_3B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bp_item_MouseDown);
+            this.item_bp_3B.Enter += new System.EventHandler(this.item_Enter);
             // 
             // skill_11B
             // 
@@ -537,11 +537,11 @@ namespace DotaHIT
             this.skill_11B.TabIndex = 25;
             this.skill_11B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.skill_11B.UseVisualStyleBackColor = false;
-            this.skill_11B.Enter += new System.EventHandler(this.item_Enter);
             this.skill_11B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.skill_11B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.skill_MouseDown);
-            this.skill_11B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.skill_MouseMove);
             this.skill_11B.Paint += new System.Windows.Forms.PaintEventHandler(this.skill_Paint);
+            this.skill_11B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.skill_MouseMove);
+            this.skill_11B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.skill_MouseDown);
+            this.skill_11B.Enter += new System.EventHandler(this.item_Enter);
             // 
             // skill_10B
             // 
@@ -558,11 +558,11 @@ namespace DotaHIT
             this.skill_10B.TabIndex = 24;
             this.skill_10B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.skill_10B.UseVisualStyleBackColor = false;
-            this.skill_10B.Enter += new System.EventHandler(this.item_Enter);
             this.skill_10B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.skill_10B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.skill_MouseDown);
-            this.skill_10B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.skill_MouseMove);
             this.skill_10B.Paint += new System.Windows.Forms.PaintEventHandler(this.skill_Paint);
+            this.skill_10B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.skill_MouseMove);
+            this.skill_10B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.skill_MouseDown);
+            this.skill_10B.Enter += new System.EventHandler(this.item_Enter);
             // 
             // skill_9B
             // 
@@ -579,11 +579,11 @@ namespace DotaHIT
             this.skill_9B.TabIndex = 23;
             this.skill_9B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.skill_9B.UseVisualStyleBackColor = false;
-            this.skill_9B.Enter += new System.EventHandler(this.item_Enter);
             this.skill_9B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.skill_9B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.skill_MouseDown);
-            this.skill_9B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.skill_MouseMove);
             this.skill_9B.Paint += new System.Windows.Forms.PaintEventHandler(this.skill_Paint);
+            this.skill_9B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.skill_MouseMove);
+            this.skill_9B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.skill_MouseDown);
+            this.skill_9B.Enter += new System.EventHandler(this.item_Enter);
             // 
             // skill_8B
             // 
@@ -600,11 +600,11 @@ namespace DotaHIT
             this.skill_8B.TabIndex = 22;
             this.skill_8B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.skill_8B.UseVisualStyleBackColor = false;
-            this.skill_8B.Enter += new System.EventHandler(this.item_Enter);
             this.skill_8B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.skill_8B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.skill_MouseDown);
-            this.skill_8B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.skill_MouseMove);
             this.skill_8B.Paint += new System.Windows.Forms.PaintEventHandler(this.skill_Paint);
+            this.skill_8B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.skill_MouseMove);
+            this.skill_8B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.skill_MouseDown);
+            this.skill_8B.Enter += new System.EventHandler(this.item_Enter);
             // 
             // minimizeB
             // 
@@ -669,9 +669,9 @@ namespace DotaHIT
             this.heroStatsPanel.Size = new System.Drawing.Size(555, 217);
             this.heroStatsPanel.TabIndex = 37;
             this.heroStatsPanel.DragOver += new System.Windows.Forms.DragEventHandler(this.main_DragOver);
-            this.heroStatsPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.heroStatsPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
             this.heroStatsPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.main_DragDrop);
+            this.heroStatsPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.heroStatsPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
             // 
             // playerSelectionPanel
@@ -868,8 +868,8 @@ namespace DotaHIT
             this.attackUpgradeLabel.Text = "0";
             this.attackUpgradeLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.attackUpgradeLabel.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.attackUpgradeLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.attackUpgradeLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.damagePB_MouseMove);
+            this.attackUpgradeLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.attackUpgradeLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
             // 
             // armorPB
@@ -881,8 +881,8 @@ namespace DotaHIT
             this.armorPB.TabIndex = 19;
             this.armorPB.TabStop = false;
             this.armorPB.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.armorPB.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.armorPB.MouseMove += new System.Windows.Forms.MouseEventHandler(this.armorPB_MouseMove);
+            this.armorPB.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.armorPB.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
             // 
             // strengthRTB
@@ -1022,8 +1022,8 @@ namespace DotaHIT
             this.primAttrPB.TabIndex = 21;
             this.primAttrPB.TabStop = false;
             this.primAttrPB.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.primAttrPB.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.primAttrPB.MouseMove += new System.Windows.Forms.MouseEventHandler(this.primAttrPB_MouseMove);
+            this.primAttrPB.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.primAttrPB.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
             // 
             // armorLL
@@ -1042,8 +1042,8 @@ namespace DotaHIT
             this.armorLL.TabStop = true;
             this.armorLL.Text = "Armor:";
             this.armorLL.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.armorLL.MouseDown += new System.Windows.Forms.MouseEventHandler(this.armorLL_MouseDown);
             this.armorLL.MouseMove += new System.Windows.Forms.MouseEventHandler(this.armorLL_MouseMove);
+            this.armorLL.MouseDown += new System.Windows.Forms.MouseEventHandler(this.armorLL_MouseDown);
             // 
             // damageRTB
             // 
@@ -1071,8 +1071,8 @@ namespace DotaHIT
             this.damagePB.TabIndex = 20;
             this.damagePB.TabStop = false;
             this.damagePB.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
-            this.damagePB.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.damagePB.MouseMove += new System.Windows.Forms.MouseEventHandler(this.damagePB_MouseMove);
+            this.damagePB.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.damagePB.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
             // 
             // statusLL
@@ -1189,8 +1189,8 @@ namespace DotaHIT
             this.heroImagePB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.heroImagePB.TabIndex = 14;
             this.heroImagePB.TabStop = false;
-            this.heroImagePB.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.heroImagePB.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
+            this.heroImagePB.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.heroImagePB.MouseUp += new System.Windows.Forms.MouseEventHandler(this.heroImagePB_MouseUp);
             // 
             // versionLabel
@@ -1201,9 +1201,9 @@ namespace DotaHIT
             this.versionLabel.ForeColor = System.Drawing.Color.White;
             this.versionLabel.Location = new System.Drawing.Point(257, 5);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(57, 13);
+            this.versionLabel.Size = new System.Drawing.Size(65, 13);
             this.versionLabel.TabIndex = 32;
-            this.versionLabel.Text = "v0.999r";
+            this.versionLabel.Text = "v0.999r2";
             // 
             // inventoryLL
             // 
@@ -1259,7 +1259,7 @@ namespace DotaHIT
             // openFileToolStripMenuItem
             // 
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.openFileToolStripMenuItem.Text = "Open...";
             this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
             // 
@@ -1268,30 +1268,30 @@ namespace DotaHIT
             this.recentToolStripSeparator.BackColor = System.Drawing.Color.Black;
             this.recentToolStripSeparator.ForeColor = System.Drawing.Color.Black;
             this.recentToolStripSeparator.Name = "recentToolStripSeparator";
-            this.recentToolStripSeparator.Size = new System.Drawing.Size(120, 6);
+            this.recentToolStripSeparator.Size = new System.Drawing.Size(131, 6);
             // 
             // propertiesToolStripSeparator
             // 
             this.propertiesToolStripSeparator.Name = "propertiesToolStripSeparator";
-            this.propertiesToolStripSeparator.Size = new System.Drawing.Size(120, 6);
+            this.propertiesToolStripSeparator.Size = new System.Drawing.Size(131, 6);
             // 
             // propertiesToolStripMenuItem
             // 
             this.propertiesToolStripMenuItem.Enabled = false;
             this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
-            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.propertiesToolStripMenuItem.Text = "Properties";
             this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.propertiesToolStripMenuItem_Click);
             // 
             // exitToolStripSeparator
             // 
             this.exitToolStripSeparator.Name = "exitToolStripSeparator";
-            this.exitToolStripSeparator.Size = new System.Drawing.Size(120, 6);
+            this.exitToolStripSeparator.Size = new System.Drawing.Size(131, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -1309,14 +1309,14 @@ namespace DotaHIT
             // aboutTSMI
             // 
             this.aboutTSMI.Name = "aboutTSMI";
-            this.aboutTSMI.Size = new System.Drawing.Size(103, 22);
+            this.aboutTSMI.Size = new System.Drawing.Size(114, 22);
             this.aboutTSMI.Text = "About";
             this.aboutTSMI.Click += new System.EventHandler(this.aboutTSMI_Click);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
@@ -1340,7 +1340,7 @@ namespace DotaHIT
             this.unboundToolStripMenuItem});
             this.listsToolStripMenuItem1.ForeColor = System.Drawing.Color.Black;
             this.listsToolStripMenuItem1.Name = "listsToolStripMenuItem1";
-            this.listsToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
+            this.listsToolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
             this.listsToolStripMenuItem1.Text = "Lists";
             // 
             // boundToolStripMenuItem
@@ -1350,7 +1350,7 @@ namespace DotaHIT
             this.boundToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.boundToolStripMenuItem.MergeIndex = 1;
             this.boundToolStripMenuItem.Name = "boundToolStripMenuItem";
-            this.boundToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.boundToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.boundToolStripMenuItem.Text = "Bound (Default)";
             this.boundToolStripMenuItem.Click += new System.EventHandler(this.boundStateToolStripMenuItem_Click);
             // 
@@ -1359,7 +1359,7 @@ namespace DotaHIT
             this.unboundToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.unboundToolStripMenuItem.MergeIndex = 0;
             this.unboundToolStripMenuItem.Name = "unboundToolStripMenuItem";
-            this.unboundToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.unboundToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.unboundToolStripMenuItem.Text = "Unbound";
             this.unboundToolStripMenuItem.Click += new System.EventHandler(this.boundStateToolStripMenuItem_Click);
             // 
@@ -1374,7 +1374,7 @@ namespace DotaHIT
             this.noneDefaultToolStripMenuItem});
             this.themeToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.themeToolStripMenuItem.Name = "themeToolStripMenuItem";
-            this.themeToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.themeToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.themeToolStripMenuItem.Text = "Theme";
             // 
             // nightElfToolStripMenuItem
@@ -1382,7 +1382,7 @@ namespace DotaHIT
             this.nightElfToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.nightElfToolStripMenuItem.MergeIndex = 1;
             this.nightElfToolStripMenuItem.Name = "nightElfToolStripMenuItem";
-            this.nightElfToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.nightElfToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.nightElfToolStripMenuItem.Tag = "";
             this.nightElfToolStripMenuItem.Text = "Night Elf";
             this.nightElfToolStripMenuItem.Click += new System.EventHandler(this.themeToolStripMenuItem_Click);
@@ -1392,7 +1392,7 @@ namespace DotaHIT
             this.humanToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.humanToolStripMenuItem.MergeIndex = 2;
             this.humanToolStripMenuItem.Name = "humanToolStripMenuItem";
-            this.humanToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.humanToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.humanToolStripMenuItem.Tag = "";
             this.humanToolStripMenuItem.Text = "Human";
             this.humanToolStripMenuItem.Click += new System.EventHandler(this.themeToolStripMenuItem_Click);
@@ -1401,7 +1401,7 @@ namespace DotaHIT
             // 
             this.orcToolStripMenuItem.MergeIndex = 3;
             this.orcToolStripMenuItem.Name = "orcToolStripMenuItem";
-            this.orcToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.orcToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.orcToolStripMenuItem.Text = "Orc";
             this.orcToolStripMenuItem.Click += new System.EventHandler(this.themeToolStripMenuItem_Click);
             // 
@@ -1409,7 +1409,7 @@ namespace DotaHIT
             // 
             this.undeadToolStripMenuItem.MergeIndex = 4;
             this.undeadToolStripMenuItem.Name = "undeadToolStripMenuItem";
-            this.undeadToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.undeadToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.undeadToolStripMenuItem.Text = "Undead";
             this.undeadToolStripMenuItem.Click += new System.EventHandler(this.themeToolStripMenuItem_Click);
             // 
@@ -1420,14 +1420,14 @@ namespace DotaHIT
             this.noneDefaultToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.noneDefaultToolStripMenuItem.MergeIndex = 0;
             this.noneDefaultToolStripMenuItem.Name = "noneDefaultToolStripMenuItem";
-            this.noneDefaultToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.noneDefaultToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.noneDefaultToolStripMenuItem.Text = "None (Default)";
             this.noneDefaultToolStripMenuItem.Click += new System.EventHandler(this.themeToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.settingsToolStripMenuItem.Text = "Settings...";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
@@ -1447,28 +1447,28 @@ namespace DotaHIT
             // customKeysGeneratorToolStripMenuItem
             // 
             this.customKeysGeneratorToolStripMenuItem.Name = "customKeysGeneratorToolStripMenuItem";
-            this.customKeysGeneratorToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.customKeysGeneratorToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.customKeysGeneratorToolStripMenuItem.Text = "CustomKeys Generator";
             this.customKeysGeneratorToolStripMenuItem.Click += new System.EventHandler(this.customKeysGeneratorToolStripMenuItem_Click);
             // 
             // dataDumpToolStripMenuItem
             // 
             this.dataDumpToolStripMenuItem.Name = "dataDumpToolStripMenuItem";
-            this.dataDumpToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.dataDumpToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.dataDumpToolStripMenuItem.Text = "Data dump";
             this.dataDumpToolStripMenuItem.Click += new System.EventHandler(this.dataDumpToolStripMenuItem_Click);
             // 
             // extractImagesToolStripMenuItem
             // 
             this.extractImagesToolStripMenuItem.Name = "extractImagesToolStripMenuItem";
-            this.extractImagesToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.extractImagesToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.extractImagesToolStripMenuItem.Text = "Extract Images";
             this.extractImagesToolStripMenuItem.Click += new System.EventHandler(this.extractImagesToolStripMenuItem_Click);
             // 
             // replayParserToolStripMenuItem
             // 
             this.replayParserToolStripMenuItem.Name = "replayParserToolStripMenuItem";
-            this.replayParserToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.replayParserToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.replayParserToolStripMenuItem.Text = "Replay Parser";
             this.replayParserToolStripMenuItem.Click += new System.EventHandler(this.replayParserToolStripMenuItem_Click);
             // 
@@ -1488,32 +1488,32 @@ namespace DotaHIT
             // openBuildToolStripMenuItem
             // 
             this.openBuildToolStripMenuItem.Name = "openBuildToolStripMenuItem";
-            this.openBuildToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.openBuildToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.openBuildToolStripMenuItem.Text = "Open...";
             this.openBuildToolStripMenuItem.Click += new System.EventHandler(this.openBuildToolStripMenuItem_Click);
             // 
             // saveBuildToolStripMenuItem
             // 
             this.saveBuildToolStripMenuItem.Name = "saveBuildToolStripMenuItem";
-            this.saveBuildToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.saveBuildToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.saveBuildToolStripMenuItem.Text = "Save as...";
             this.saveBuildToolStripMenuItem.Click += new System.EventHandler(this.saveBuildToolStripMenuItem_Click);
             // 
             // recentBuildsToolStripMenuItem
             // 
             this.recentBuildsToolStripMenuItem.Name = "recentBuildsToolStripMenuItem";
-            this.recentBuildsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.recentBuildsToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.recentBuildsToolStripMenuItem.Text = "Recent Builds";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(135, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
             // 
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             this.resetToolStripMenuItem.ToolTipText = "Reset current hero to his initial state";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
@@ -1529,8 +1529,8 @@ namespace DotaHIT
             this.mapNameLabel.TabIndex = 24;
             this.mapNameLabel.Text = "DotA Allstars v6.41.w3x";
             this.mapNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.mapNameLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.mapNameLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
+            this.mapNameLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.mapNameLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
             // 
             // inventoryPanel
@@ -1608,12 +1608,12 @@ namespace DotaHIT
             this.item_1B.TabIndex = 23;
             this.item_1B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.item_1B.UseVisualStyleBackColor = false;
-            this.item_1B.Enter += new System.EventHandler(this.item_Enter);
             this.item_1B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
             this.item_1B.DragOver += new System.Windows.Forms.DragEventHandler(this.item_DragOver);
-            this.item_1B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.item_MouseDown);
             this.item_1B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.item_MouseMove);
             this.item_1B.DragDrop += new System.Windows.Forms.DragEventHandler(this.item_DragDrop);
+            this.item_1B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.item_MouseDown);
+            this.item_1B.Enter += new System.EventHandler(this.item_Enter);
             this.item_1B.MouseUp += new System.Windows.Forms.MouseEventHandler(this.item_MouseUp);
             // 
             // item_4B
@@ -1636,12 +1636,12 @@ namespace DotaHIT
             this.item_4B.TabIndex = 28;
             this.item_4B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.item_4B.UseVisualStyleBackColor = false;
-            this.item_4B.Enter += new System.EventHandler(this.item_Enter);
             this.item_4B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
             this.item_4B.DragOver += new System.Windows.Forms.DragEventHandler(this.item_DragOver);
-            this.item_4B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.item_MouseDown);
             this.item_4B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.item_MouseMove);
             this.item_4B.DragDrop += new System.Windows.Forms.DragEventHandler(this.item_DragDrop);
+            this.item_4B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.item_MouseDown);
+            this.item_4B.Enter += new System.EventHandler(this.item_Enter);
             this.item_4B.MouseUp += new System.Windows.Forms.MouseEventHandler(this.item_MouseUp);
             // 
             // item_2B
@@ -1664,12 +1664,12 @@ namespace DotaHIT
             this.item_2B.TabIndex = 24;
             this.item_2B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.item_2B.UseVisualStyleBackColor = false;
-            this.item_2B.Enter += new System.EventHandler(this.item_Enter);
             this.item_2B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
             this.item_2B.DragOver += new System.Windows.Forms.DragEventHandler(this.item_DragOver);
-            this.item_2B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.item_MouseDown);
             this.item_2B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.item_MouseMove);
             this.item_2B.DragDrop += new System.Windows.Forms.DragEventHandler(this.item_DragDrop);
+            this.item_2B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.item_MouseDown);
+            this.item_2B.Enter += new System.EventHandler(this.item_Enter);
             this.item_2B.MouseUp += new System.Windows.Forms.MouseEventHandler(this.item_MouseUp);
             // 
             // item_3B
@@ -1692,12 +1692,12 @@ namespace DotaHIT
             this.item_3B.TabIndex = 27;
             this.item_3B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.item_3B.UseVisualStyleBackColor = false;
-            this.item_3B.Enter += new System.EventHandler(this.item_Enter);
             this.item_3B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
             this.item_3B.DragOver += new System.Windows.Forms.DragEventHandler(this.item_DragOver);
-            this.item_3B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.item_MouseDown);
             this.item_3B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.item_MouseMove);
             this.item_3B.DragDrop += new System.Windows.Forms.DragEventHandler(this.item_DragDrop);
+            this.item_3B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.item_MouseDown);
+            this.item_3B.Enter += new System.EventHandler(this.item_Enter);
             this.item_3B.MouseUp += new System.Windows.Forms.MouseEventHandler(this.item_MouseUp);
             // 
             // item_5B
@@ -1720,12 +1720,12 @@ namespace DotaHIT
             this.item_5B.TabIndex = 25;
             this.item_5B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.item_5B.UseVisualStyleBackColor = false;
-            this.item_5B.Enter += new System.EventHandler(this.item_Enter);
             this.item_5B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
             this.item_5B.DragOver += new System.Windows.Forms.DragEventHandler(this.item_DragOver);
-            this.item_5B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.item_MouseDown);
             this.item_5B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.item_MouseMove);
             this.item_5B.DragDrop += new System.Windows.Forms.DragEventHandler(this.item_DragDrop);
+            this.item_5B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.item_MouseDown);
+            this.item_5B.Enter += new System.EventHandler(this.item_Enter);
             this.item_5B.MouseUp += new System.Windows.Forms.MouseEventHandler(this.item_MouseUp);
             // 
             // item_6B
@@ -1748,12 +1748,12 @@ namespace DotaHIT
             this.item_6B.TabIndex = 26;
             this.item_6B.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.item_6B.UseVisualStyleBackColor = false;
-            this.item_6B.Enter += new System.EventHandler(this.item_Enter);
             this.item_6B.MouseLeave += new System.EventHandler(this.toolTip_MouseLeave);
             this.item_6B.DragOver += new System.Windows.Forms.DragEventHandler(this.item_DragOver);
-            this.item_6B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.item_MouseDown);
             this.item_6B.MouseMove += new System.Windows.Forms.MouseEventHandler(this.item_MouseMove);
             this.item_6B.DragDrop += new System.Windows.Forms.DragEventHandler(this.item_DragDrop);
+            this.item_6B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.item_MouseDown);
+            this.item_6B.Enter += new System.EventHandler(this.item_Enter);
             this.item_6B.MouseUp += new System.Windows.Forms.MouseEventHandler(this.item_MouseUp);
             // 
             // orderTabPage
@@ -1867,10 +1867,10 @@ namespace DotaHIT
             this.Text = "DotaHIT";
             this.TransparencyKey = System.Drawing.Color.Olive;
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.mainPanel.ResumeLayout(false);
             this.heroInfoPanel.ResumeLayout(false);
             this.heroSkillsPanel.ResumeLayout(false);

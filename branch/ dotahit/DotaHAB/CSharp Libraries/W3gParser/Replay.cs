@@ -1262,31 +1262,43 @@ namespace Deerchao.War3Share.W3gParser
 
             if (TryFindHeroByCache(player.State.CurrentSelection, out hero, out objectId1))
             {
-                // if the hero object is empty                              
+                // if the hero object value is empty (which means this hero hasn't been used by anyone yet)
                 if (hero.ObjectId == -1)
                 {
+                    // get name of currently selected hero
                     string heroName = hero.Name;
-
-                    // get hero owned by this player
+ 	                    // find hero that is owned by this player
+ 	                    // and has same name as the hero currently selected
                     Hero playerHero = player.Heroes[heroName];
 
                     // if this player does not own hero with specified name
                     if (playerHero == null)
                     {
-                        // then use the object from the hero-cache
+                        // then use the selected hero
                         playerHero = hero;
 
                         // add this hero to current player
+                        // (the player will own this hero from now on)
                         player.Heroes.Order(playerHero, time);
                     }
-                    else
+                    else // if this player does have a hero with same name as the selected hero,
+                         // then use the player's own hero
                         hero = playerHero;
 
                     // assign object id to this hero
                     hero.ObjectId = objectId1;
 
+                    // update hero-cache
+                    // this ensures that objectId contained in current selection
+                    // will reference the hero object that this player owns.
                     dcHeroCache[objectId1] = hero;
                 }
+                else
+                    // if this hero has been already used by someone,
+                    // check if this player doesnt have any hero,
+                    // in which case add this hero to him (players probably used -swap command)
+                    if (player.Heroes.Count == 0)
+                        player.Heroes.Order(hero, time);
 
                 IncreaseHeroUseCount(player, hero);
 
