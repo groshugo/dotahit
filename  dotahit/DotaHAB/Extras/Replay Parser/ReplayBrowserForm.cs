@@ -297,8 +297,12 @@ namespace DotaHIT.Extras
                     currentReplay = new Replay(filename, MapRequired);
                     dcReplayCache[filename] = currentReplay;
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.Source);
+                    Console.WriteLine(ex.StackTrace);
+                    Console.WriteLine(ex.TargetSite);
                     MessageBox.Show("An error occured while parsing this replay");
                     currentReplay = null;
                     return false;
@@ -357,6 +361,16 @@ namespace DotaHIT.Extras
                 replayFinder = new DotaHIT.Extras.Replay_Parser.ReplayFinder(this, browser.SelectedPath);
                 replayFinder.Show();
             }
+        }
+
+        private void includeNamesCB_CheckedChanged(object sender, EventArgs e)
+        {
+            namesCmbB.Enabled = includeNamesCB.Checked;
+        }
+
+        private void namesCmbB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            layoutCmbB_SelectedIndexChanged(null, EventArgs.Empty);
         }                                           
     }
 }

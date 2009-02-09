@@ -31,7 +31,9 @@ namespace Deerchao.War3Share.W3gParser
         private readonly Groups groups = new Groups();
         private readonly List<PlayerAction> actions = new List<PlayerAction>();
         private readonly Dictionary<string, KeyValuePair<Hero, int>> usedHeroes = new Dictionary<string, KeyValuePair<Hero, int>>();
-        public Dictionary<string, int> gameCacheValues = new Dictionary<string, int>();        
+        public Dictionary<string, int> gameCacheValues = new Dictionary<string, int>();
+        public unit Hero;
+        public player player;
 
         public byte Id
         {
@@ -237,6 +239,7 @@ namespace Deerchao.War3Share.W3gParser
                 reader.ReadInt32();
                 Race = (Race)reader.ReadUInt32();
             }
+            player = player.players[playerId];
         }
 
         public int getGCValue(string key)

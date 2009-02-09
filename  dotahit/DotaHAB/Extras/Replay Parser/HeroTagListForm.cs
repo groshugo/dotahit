@@ -51,21 +51,45 @@ namespace DotaHIT.Extras
                     break;
 
                 case 1: // tag
-                    e.Value = hpsHeroTags.GetStringValue(hpsHero.name);
+                    e.Value = hpsHeroTags.GetStringValue(hpsHero.name).Split(';')[0];
                     break;
 
                 case 2: // name
-                    e.Value = hpsHero.GetStringValue("Name");
+                    int length = hpsHeroTags.GetStringValue(hpsHero.name).Split(';').Length;
+                    if (length < 2)
+                        e.Value = hpsHero.GetStringValue("Propernames").Split(',')[0];
+                    else
+                        e.Value = hpsHeroTags.GetStringValue(hpsHero.name).Split(';')[1];
                     break;                
+                case 3: // 2nd name
+                    int len = hpsHeroTags.GetStringValue(hpsHero.name).Split(';').Length;
+                    if (len < 3)
+                        e.Value = hpsHero.GetStringValue("Name").Trim('"');
+                    else
+                        e.Value = hpsHeroTags.GetStringValue(hpsHero.name).Split(';')[2];
+                    break;
             }
         }
 
         private void heroTagGridView_CellValuePushed(object sender, DataGridViewCellValueEventArgs e)
         {
-            if (e.ColumnIndex == 1)
+            int index = e.ColumnIndex;
+            string value = e.Value.ToString();
+            switch (index)
             {
-                string heroName = heroes[e.RowIndex];
-                hpsHeroTags[heroName] = e.Value;
+                case 1:
+                case 2:
+                case 3:
+                    string heroName = heroes[e.RowIndex];
+                    string result = "";
+                    for (int i = 1; i < 4; i++)
+                        if (i != index)
+                            result += heroTagGridView.Rows[e.RowIndex].Cells[i].Value.ToString() + ";";
+                        else
+                            result += value + ";";
+                    result.Trim(';');
+                    hpsHeroTags[heroName] = result;
+                    break;
             }
         }
 
@@ -94,7 +118,7 @@ namespace DotaHIT.Extras
     {
         int IComparer<string>.Compare(string a, string b)
         {
-            return StringComparer.OrdinalIgnoreCase.Compare(DHLOOKUP.hpcUnitProfiles[a].GetStringValue("Name"), DHLOOKUP.hpcUnitProfiles[b].GetStringValue("Name"));
+            return StringComparer.OrdinalIgnoreCase.Compare(DHLOOKUP.hpcUnitProfiles[a].GetStringValue("Propernames"), DHLOOKUP.hpcUnitProfiles[b].GetStringValue("Propernames"));
         }
     }
 }
