@@ -8376,6 +8376,9 @@ namespace DotaHIT.DatabaseModel.Abilities
                 Current.player.units.Add(crunit.handle,crunit);
                 Current.unit = crunit;
                 this.SetOwner(crunit);
+                foreach (DBABILITY ability in crunit.heroAbilities)
+                    if (ability.Alias == this.codeID)
+                        ability.AbilityState = AbilityState.PermanentlyActivated;
             }
 
             //double result = hero.statsDamage.convert_to_double() * this.damageIncrease;

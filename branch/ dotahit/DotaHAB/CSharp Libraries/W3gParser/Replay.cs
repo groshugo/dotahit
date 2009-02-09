@@ -216,17 +216,17 @@ namespace Deerchao.War3Share.W3gParser
 
             // end research sessions for all players
             foreach (Player player in players)
-            if(!player.IsObserver)
+            if(!player.IsObserver && !player.IsComputer)
             {
                 player.State.EndResearch();
                 player.Hero = SummonHero(player.GetMostUsedHero().Name, player);
                 if (!GetInventoryFromCache(player))
-                    FillUpPlayerInventory(player);
+                    FillUpPlayerInventory(player, true);
             }
             Current.player = GetPlayerBySpecialSlot(1).player;
             Current.player.units.Clear();
             foreach (Player player in players)
-            if (!player.IsObserver)
+            if (!player.IsObserver && !player.IsComputer)
             {
                 player.Hero.Level = player.GetMostUsedHero().Level;
                 foreach (OrderItem skill in player.GetMostUsedHero().Abilities.BuildOrders)
@@ -743,7 +743,7 @@ namespace Deerchao.War3Share.W3gParser
                             reader.ReadInt64();
                             long pos = reader.BaseStream.Position;
                             string command = ParserUtility.ReadString(reader).ToLower();
-                            if (player.Color == PlayerColor.Blue && time < 15000 && mode == null)
+                            if (player.Color == PlayerColor.Blue && time < 15000 && mode == null && command.Length > 2)
                                 if ((command != "-di") && (command != "-hhn"))
                                     mode = command;
 
@@ -1041,7 +1041,7 @@ namespace Deerchao.War3Share.W3gParser
                 return false;
             for (int i = 0; i < 6; i++)
             {
-                _item = p.gameCacheValues["8_" + i.ToString()];
+                p.gameCacheValues.TryGetValue("8_" + i.ToString(), out _item);
                 if (_item == 0)
                     continue;
                 item item = new item(_item);
@@ -1051,7 +1051,7 @@ namespace Deerchao.War3Share.W3gParser
                 return true;
         }
 
-        bool FillUpPlayerInventory(Player p)
+        bool FillUpPlayerInventory(Player p, bool excludeRecipes)
         {
             IRecord item;
             unit shop = null;
@@ -1060,6 +1060,7 @@ namespace Deerchao.War3Share.W3gParser
             String itemID = null;
             DBINVENTORY Inventory = p.Hero.Inventory;
 
+            Inventory.DisableRefresh();
             foreach (OrderItem orderitem in p.Items.BuildOrders)
             {
                 itemID = orderitem.Name;
@@ -1084,7 +1085,6 @@ namespace Deerchao.War3Share.W3gParser
 
                 p.Hero.set_location(shop.get_location());
 
-
                 item = isNewVersionItem ? (IRecord)new unit(itemID) : (IRecord)new item(itemID);
 
                 item = item.Clone();
@@ -1099,21 +1099,25 @@ namespace Deerchao.War3Share.W3gParser
                 else
                     shop.OnSellItem(item as item, p.Hero);
 
-                Thread.Sleep(2); // to pass control to item handling script thread
-                System.Windows.Forms.Application.DoEvents();
+                Inventory.put_item(item as item);
+
+                //Thread.Sleep(2); // to pass control to item handling script thread
+                //System.Windows.Forms.Application.DoEvents();
+
+                //Drop consumables
                 for (int i = 0; i < Inventory.Capacity-2; i++)
                 {
                     if (Inventory.itemAt(i) != null)
                     {
-                        // || Inventory[i].Item.iconName.ToString().ToLower().Contains("scroll")
-                        if (!Inventory[i].Item.uses.IsNull/* || Inventory[i].Item.goldCost == 57*/)
+                        if (Inventory[i].Item.uses != (DBINT)0)
                         {
                             Inventory[i].drop_item();
                             break;
                         }
                     }
                 }
-                // Shift down
+
+                // Shift down after drop
                 for (int i = 0; i < Inventory.Capacity-2; i++)
                     if (Inventory.itemAt(i) == null && Inventory.itemAt(i + 1) != null)
                     {
@@ -1125,7 +1129,7 @@ namespace Deerchao.War3Share.W3gParser
                 { 
                     int index = FindCheapestItemIndex(Inventory);
                     if (Inventory[i].Item!=null)
-                        if (Inventory[i].Item.goldCost > Inventory[index].Item.goldCost/* && !Inventory[index].Item.Title.ToString().ToLower().Contains("boots")*/)
+                        if (Inventory[i].Item.goldCost > Inventory[index].Item.goldCost)
                         {
                             Inventory.swap_items(Inventory[i], Inventory[FindCheapestItemIndex(Inventory)]);
                             p.Hero.OnPickupItem(Inventory[0].Item);
@@ -1134,21 +1138,41 @@ namespace Deerchao.War3Share.W3gParser
                 System.Windows.Forms.Application.DoEvents();
             }
 
-            for (int i = 6; i < Inventory.Capacity - 2; i++)
+            // Shit stuff
+            //for (int i = 6; i < Inventory.Capacity - 2; i++)
+            //{
+            //    if (Inventory[i].Item != null)
+            //    {
+            //        int index = FindMostExpensiveItemIndex(Inventory);
+            //        Inventory.swap_items(Inventory[i], Inventory[index]);
+            //        p.Hero.OnPickupItem(Inventory[0].Item);
+            //        Thread.Sleep(2);
+            //        System.Windows.Forms.Application.DoEvents();
+            //        Inventory.swap_items(Inventory[i], Inventory[index]);
+            //        p.Hero.OnPickupItem(Inventory[0].Item);
+            //        Thread.Sleep(2);
+            //        System.Windows.Forms.Application.DoEvents();
+            //    }
+            //}
+
+            if (excludeRecipes)
             {
-                if (Inventory[i].Item != null)
-                {
-                    int index = FindMostExpensiveItemIndex(Inventory);
-                    Inventory.swap_items(Inventory[i], Inventory[index]);
-                    p.Hero.OnPickupItem(Inventory[0].Item);
-                    Thread.Sleep(2);
-                    System.Windows.Forms.Application.DoEvents();
-                    Inventory.swap_items(Inventory[i], Inventory[index]);
-                    p.Hero.OnPickupItem(Inventory[0].Item);
-                    Thread.Sleep(2);
-                    System.Windows.Forms.Application.DoEvents();
-                }
+                foreach (DBITEMSLOT slot in Inventory)
+                    if (slot.Item != null)
+                        if (slot.Item.iconName.Text.ToLower().Contains("snazzyscroll"))
+                            slot.drop_item();
             }
+
+            Comparison<DBITEMSLOT> UpSorter = delegate(DBITEMSLOT a, DBITEMSLOT b)
+            {
+                return (b.Item != null ? (int)b.Item.goldCost : 0) - (a.Item != null ? (int)a.Item.goldCost : 0);
+            };
+
+            List<DBITEMSLOT> range = Inventory.GetRange(6, Inventory.Capacity - 10);
+            range.Sort(UpSorter);
+            Inventory.RemoveRange(6, Inventory.Capacity - 10);
+            Inventory.InsertRange(6, range);
+
             // Final Shift down
             for (int j = 0; j < 5; j++ )
                 for (int i = 0; i < Inventory.Capacity - 2; i++)
@@ -1160,17 +1184,14 @@ namespace Deerchao.War3Share.W3gParser
                     }
                 }
 
+            // Move some items to the backpack, and set capacity to 10
             for (int i = 0; i < 4; i++ )
             {
                 Inventory.swap_items(Inventory[6+i],Inventory[Inventory.Capacity-4+i]);
             }
             Inventory.RemoveRange(6, Inventory.Capacity - 10);
 
-            System.Windows.Forms.Application.DoEvents();
-            System.Console.WriteLine(p.Hero.Title);
-            for (int i = 0; i < 6; i++)
-            if (Inventory[i].Item!=null)
-                Console.WriteLine(Inventory[i].Item.Title);
+            Inventory.EnableRefresh();
             return true;
         }
         
