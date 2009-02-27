@@ -469,14 +469,14 @@ namespace DotaHIT.Extras
             // parseToolStripMenuItem
             // 
             this.parseToolStripMenuItem.Name = "parseToolStripMenuItem";
-            this.parseToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.parseToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.parseToolStripMenuItem.Text = "Parse";
             this.parseToolStripMenuItem.Click += new System.EventHandler(this.parseToolStripMenuItem_Click);
             // 
             // extractToolStripMenuItem
             // 
             this.extractToolStripMenuItem.Name = "extractToolStripMenuItem";
-            this.extractToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.extractToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.extractToolStripMenuItem.Text = "Extract data...";
             this.extractToolStripMenuItem.Click += new System.EventHandler(this.extractToolStripMenuItem_Click);
             // 
@@ -492,7 +492,7 @@ namespace DotaHIT.Extras
             // replayFinderToolStripMenuItem
             // 
             this.replayFinderToolStripMenuItem.Name = "replayFinderToolStripMenuItem";
-            this.replayFinderToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.replayFinderToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.replayFinderToolStripMenuItem.Text = "Replay Finder";
             this.replayFinderToolStripMenuItem.Click += new System.EventHandler(this.replayFinderToolStripMenuItem_Click);
             // 
@@ -692,6 +692,7 @@ namespace DotaHIT.Extras
             // 
             // namesCmbB
             // 
+            this.namesCmbB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.namesCmbB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.namesCmbB.Enabled = false;
             this.namesCmbB.FormattingEnabled = true;
@@ -708,6 +709,7 @@ namespace DotaHIT.Extras
             // 
             // includeNamesCB
             // 
+            this.includeNamesCB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.includeNamesCB.AutoSize = true;
             this.includeNamesCB.Location = new System.Drawing.Point(467, 109);
             this.includeNamesCB.Name = "includeNamesCB";
@@ -1606,26 +1608,26 @@ namespace DotaHIT.Extras
             this.copyHeroNameToolStripMenuItem});
             this.playerContextMenuStrip.Name = "playerContextMenuStrip";
             this.playerContextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.playerContextMenuStrip.Size = new System.Drawing.Size(240, 70);
+            this.playerContextMenuStrip.Size = new System.Drawing.Size(251, 70);
             // 
             // bringHeroIconToFrontToolStripMenuItem
             // 
             this.bringHeroIconToFrontToolStripMenuItem.Name = "bringHeroIconToFrontToolStripMenuItem";
-            this.bringHeroIconToFrontToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.bringHeroIconToFrontToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.bringHeroIconToFrontToolStripMenuItem.Text = "Bring Hero Icon to Front (minimap)";
             this.bringHeroIconToFrontToolStripMenuItem.Click += new System.EventHandler(this.bringHeroIconToFrontToolStripMenuItem_Click);
             // 
             // copyPlayerNameToolStripMenuItem
             // 
             this.copyPlayerNameToolStripMenuItem.Name = "copyPlayerNameToolStripMenuItem";
-            this.copyPlayerNameToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.copyPlayerNameToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.copyPlayerNameToolStripMenuItem.Text = "Copy Player Name";
             this.copyPlayerNameToolStripMenuItem.Click += new System.EventHandler(this.copyPlayerNameToolStripMenuItem_Click);
             // 
             // copyHeroNameToolStripMenuItem
             // 
             this.copyHeroNameToolStripMenuItem.Name = "copyHeroNameToolStripMenuItem";
-            this.copyHeroNameToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.copyHeroNameToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.copyHeroNameToolStripMenuItem.Text = "Copy Hero Name";
             this.copyHeroNameToolStripMenuItem.Click += new System.EventHandler(this.copyHeroNameToolStripMenuItem_Click);
             // 

@@ -1466,6 +1466,10 @@ namespace DotaHIT.DatabaseModel.Abilities
 
             if ((copyInfo & AbilityInfo.TriggerType) != 0)
                 to.triggerType = (from != null) ? from.triggerType : AbilityTriggerType.Default;
+            
+            //!
+            //if (from != null)
+            //    to.refresh(from.hpsLevelMeta);
         }
 
         public static DBABILITY InitProperAbility(HabProperties hpsAbilityData)
@@ -8240,6 +8244,79 @@ namespace DotaHIT.DatabaseModel.Abilities
         {
             this.StackDataA = Math.Max(this.StackDataA, a.StackDataA);
             this.StackDataB = Math.Max(this.StackDataB, a.StackDataB);
+        }
+    }
+
+    public class DBHEARTHPREGENABILITY : DBHPREGENABILITY
+    {
+        private DBDOUBLE bonusRegen = new DBDOUBLE(null);
+        private string valueColumn = "Oar1";
+
+        public DBHEARTHPREGENABILITY() { }
+        public DBHEARTHPREGENABILITY(HabProperties hps)
+            : base(hps)
+        {            
+        }
+        public DBHEARTHPREGENABILITY(string column, DBABILITY parent)
+            : base(column, parent)
+        {
+            alias = codeID;
+            valueColumn = column;
+        }
+
+        public override int Priority
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
+        public override string codeID
+        {
+            get { return "Aoar"; }
+            set { }
+        }
+
+        public override void refresh(HabProperties hps)
+        {
+            base.refresh(hps);
+
+            /////////////////////////////
+            // get value
+            /////////////////////////////
+
+            this[bonusRegen] = hps.GetValue(valueColumn);
+        }
+
+        public override double StackDataA
+        {
+            get
+            {
+                return bonusRegen;
+            }
+            set
+            {
+                bonusRegen.Value = value;
+            }
+        }
+
+        public override void Stack(DBABILITY a)
+        {
+            this.StackDataA = Math.Max(this.StackDataA, a.StackDataA);
+        }
+
+        public override bool Apply()
+        {
+            if (owner is unit)
+            {
+                unit hero = owner as unit;
+
+                this[hero.hpRegen] = Math.Floor(bonusRegen * (hero.max_hp) * 100.0) / 100.0;
+                return true;
+            }
+
+            return false;
         }
     }
 

@@ -1306,7 +1306,7 @@ namespace DotaHIT.Jass.Native.Types
         {
             if (!refresh) forceNoRefresh++;
 
-            if ((ability.AbilityState & AbilityState.Activated) != 0)
+            //if ((ability.AbilityState & AbilityState.Activated) != 0)
             {
                 // remove activated state so it wouldnt trigger twice
                 ability.AbilityState ^= AbilityState.Activated;

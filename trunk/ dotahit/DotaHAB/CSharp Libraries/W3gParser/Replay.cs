@@ -214,12 +214,17 @@ namespace Deerchao.War3Share.W3gParser
                 }
             }
 
+            // fix player slots for -sp mode
+            this.SpModeFix();
+
             // end research sessions for all players
             foreach (Player player in players)
             if(!player.IsObserver && !player.IsComputer)
             {
                 player.State.EndResearch();
                 player.Hero = SummonHero(player.GetMostUsedHero().Name, player);
+                if (player.Hero.IsDisposed)
+                    player.Hero = SummonHero(player.GetMostUsedHero().Name, player);
                 if (!GetInventoryFromCache(player))
                     FillUpPlayerInventory(player, true);
             }
@@ -238,8 +243,6 @@ namespace Deerchao.War3Share.W3gParser
                         }
                 Current.player.units.Add(player.Id, player.Hero);
             }
-            // fix player slots for -sp mode
-            this.SpModeFix();
 
 #if !SUPRESS_HASH_CALCULATION 
             hashWriter.Write(version);
@@ -944,6 +947,9 @@ namespace Deerchao.War3Share.W3gParser
                             time,
                             objectID1, objectID2));
                         break;
+                    case 0x01EE: // buyout
+                        player.BuyOut();
+                        break;
                 }
 
                 return;
@@ -1048,7 +1054,9 @@ namespace Deerchao.War3Share.W3gParser
                 item.set_owningPlayer(p.player);
                 p.Hero.Inventory.put_item(item);
             }
-                return true;
+
+            p.IsInventoryCached = true;
+            return true;
         }
 
         bool FillUpPlayerInventory(Player p, bool excludeRecipes)
@@ -1659,6 +1667,7 @@ namespace Deerchao.War3Share.W3gParser
                     player.IsObserver = teamNo == 12;
                     player.Race = race;
                     player.TeamNo = teamNo; //+ 1;
+                    player.player = DotaHIT.Jass.Native.Types.player.players[(int)color];
                 }
                 #endregion
                 #endregion
@@ -1787,12 +1796,12 @@ namespace Deerchao.War3Share.W3gParser
 
             hero = new unit(StringId, p.Items.BuildOrders.Count > 6 ? p.Items.BuildOrders.Count : 6);
             hero.DoSummon = true;
-//            hero.set_owningPlayer(p.player, 0, 0); //!
-            if (hero.get_owningPlayer()!= null) hero.get_owningPlayer().remove_unit(hero);
+            hero.set_owningPlayer(p.player, 0, 0); //!
+            //if (hero.get_owningPlayer()!= null) hero.get_owningPlayer().remove_unit(hero);
 
-            p.player.add_unit(hero);
+            //p.player.add_unit(hero);
 
-            hero.set_owningPlayer(p.player);
+            //hero.set_owningPlayer(p.player);
 
             // only new heroes process onsell event
 
