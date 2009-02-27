@@ -11,6 +11,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Threading;
 using Deerchao.War3Share.W3gParser;
+using DotaHIT;
 using DotaHIT.Core.Resources;
 using DotaHIT.Core;
 using DotaHIT.DatabaseModel.Format;
@@ -68,7 +69,7 @@ namespace DotaHIT.Extras
 
             if (open)
             {
-                if (ParseReplay(file))
+                if (ParseReplay(file, true))
                     DisplayReplay(currentReplay);
             }
 
@@ -118,7 +119,7 @@ namespace DotaHIT.Extras
             {
                 e.Cancel = true; // suppress file execution
 
-                if (ParseReplay(file))                
+                if (ParseReplay(file, true))                
                     DisplayReplay(currentReplay);                
             }
         }
@@ -280,13 +281,16 @@ namespace DotaHIT.Extras
 
         private void parseB_Click(object sender, EventArgs e)
         {
-            if (ParseReplay(browser.SelectedFile))
+            if (ParseReplay(browser.SelectedFile, true))
                 DisplayReplay(currentReplay);
         }
 
-        internal bool ParseReplay(string filename)
+        internal bool ParseReplay(string filename, bool TryReparseOnError)
         {
             if (filename == null) return false;
+
+            if (Current.player != null)
+                Current.player.selection.Clear();
 
             DHCFG.Items["Path"]["ReplayLoad"] = Path.GetDirectoryName(filename);
 
@@ -296,9 +300,15 @@ namespace DotaHIT.Extras
                 {
                     currentReplay = new Replay(filename, MapRequired);
                     dcReplayCache[filename] = currentReplay;
+                    if (Current.mainForm.cbForm.unitsForm != null)
+                        Current.mainForm.cbForm.unitsForm.ReloadUnits();
                 }
                 catch (Exception ex)
                 {
+                    if (TryReparseOnError)
+                        if (ParseReplay(filename, false))
+                            return true;
+                    // strange thing O_O
                     Console.WriteLine(ex.Message);
                     Console.WriteLine(ex.Source);
                     Console.WriteLine(ex.StackTrace);

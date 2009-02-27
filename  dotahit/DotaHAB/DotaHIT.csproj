@@ -71,6 +71,14 @@
     <Compile Include="ControlBar\UnitsForm.Designer.cs">
       <DependentUpon>UnitsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CSharp Libraries\SharpZibLib\Checksums\CRC32.cs" />
+    <Compile Include="CSharp Libraries\SharpZibLib\Encryption\PkzipClassic.cs" />
+    <Compile Include="CSharp Libraries\SharpZibLib\Zip\Compression\Deflater.cs" />
+    <Compile Include="CSharp Libraries\SharpZibLib\Zip\Compression\DeflaterEngine.cs" />
+    <Compile Include="CSharp Libraries\SharpZibLib\Zip\Compression\DeflaterHuffman.cs" />
+    <Compile Include="CSharp Libraries\SharpZibLib\Zip\Compression\DeflaterPending.cs" />
+    <Compile Include="CSharp Libraries\SharpZibLib\Zip\Compression\PendingBuffer.cs" />
+    <Compile Include="CSharp Libraries\SharpZibLib\Zip\Compression\Streams\DeflaterOutputStream.cs" />
     <Compile Include="CSharp Libraries\TgaLoader\TgaLoader.cs" />
     <Compile Include="CSharp Libraries\W3gParser\ChatInfo.cs" />
     <Compile Include="Extras\Replay Parser\ReplayDataExtractForm.cs">
@@ -102,7 +110,6 @@
     <Compile Include="CSharp Libraries\NRtfTree\RtfTree.cs" />
     <Compile Include="CSharp Libraries\NRtfTree\RtfTreeNode.cs" />
     <Compile Include="CSharp Libraries\NRtfTree\SarParser.cs" />
-    <Compile Include="CSharp Libraries\SharpZibLib\DanatCompileFix.cs" />
     <Compile Include="CSharp Libraries\W3gParser\AIStrength.cs" />
     <Compile Include="CSharp Libraries\W3gParser\KillInfo.cs" />
     <Compile Include="CSharp Libraries\W3gParser\ChineseItemString.cs" />

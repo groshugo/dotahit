@@ -34,6 +34,14 @@ namespace Deerchao.War3Share.W3gParser
         public Dictionary<string, int> gameCacheValues = new Dictionary<string, int>();
         public unit Hero;
         public player player;
+        public bool isinventorycached = false;
+        private readonly List<int> buyOuts = new List<int>();
+
+        public bool IsInventoryCached
+        {
+            get { return isinventorycached; }
+            set { isinventorycached = value; }
+        }
 
         public byte Id
         {
@@ -208,7 +216,15 @@ namespace Deerchao.War3Share.W3gParser
         internal Groups Groups
         {
             get { return groups; }
-        }       
+        }
+
+        public List<int> BuyOuts
+        {
+            get
+            {
+                return buyOuts;
+            }
+        }
 
         // 4.1 [PlayerRecord]
         internal void Load(BinaryReader reader)
@@ -239,7 +255,7 @@ namespace Deerchao.War3Share.W3gParser
                 reader.ReadInt32();
                 Race = (Race)reader.ReadUInt32();
             }
-            player = player.players[playerId];
+//            player = player.players[playerId];
         }
 
         public int getGCValue(string key)
@@ -275,6 +291,11 @@ namespace Deerchao.War3Share.W3gParser
                 return hero.GetClass();
             else
                 return "";
+        }
+
+        public void BuyOut()
+        {
+            buyOuts.Add(GetMostUsedHero().Level);
         }
 
         public override string ToString()

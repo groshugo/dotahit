@@ -247,7 +247,7 @@ namespace DotaHIT.Extras.Replay_Parser
         private void resultsLV_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && resultsLV.SelectedItems.Count > 0)
-                if (parser.ParseReplay(resultsLV.SelectedItems[0].Text))
+                if (parser.ParseReplay(resultsLV.SelectedItems[0].Text, true))
                     parser.DisplayReplay(parser.CurrentReplay);
         }
 
