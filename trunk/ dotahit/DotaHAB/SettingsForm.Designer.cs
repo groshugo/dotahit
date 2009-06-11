@@ -28,8 +28,8 @@ namespace DotaHIT
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.captionB = new System.Windows.Forms.Button();
             this.closeB = new System.Windows.Forms.Button();
             this.war3PathTextBox = new System.Windows.Forms.TextBox();
@@ -37,6 +37,7 @@ namespace DotaHIT
             this.applyB = new System.Windows.Forms.Button();
             this.cancelB = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.showDetailSwitchTipCB = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chooseVerdanaFontB = new System.Windows.Forms.Button();
             this.verdanaFontTextBox = new System.Windows.Forms.TextBox();
@@ -120,7 +121,7 @@ namespace DotaHIT
             // 
             this.applyB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.applyB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.applyB.Location = new System.Drawing.Point(8, 283);
+            this.applyB.Location = new System.Drawing.Point(8, 302);
             this.applyB.Name = "applyB";
             this.applyB.Size = new System.Drawing.Size(98, 23);
             this.applyB.TabIndex = 18;
@@ -132,7 +133,7 @@ namespace DotaHIT
             // 
             this.cancelB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cancelB.Location = new System.Drawing.Point(289, 284);
+            this.cancelB.Location = new System.Drawing.Point(289, 303);
             this.cancelB.Name = "cancelB";
             this.cancelB.Size = new System.Drawing.Size(98, 23);
             this.cancelB.TabIndex = 19;
@@ -146,6 +147,7 @@ namespace DotaHIT
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(147)))), ((int)(((byte)(148)))));
+            this.panel1.Controls.Add(this.showDetailSwitchTipCB);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.useOwnDialogsCB);
             this.panel1.Controls.Add(this.groupBox1);
@@ -156,8 +158,19 @@ namespace DotaHIT
             this.panel1.Controls.Add(this.applyB);
             this.panel1.Location = new System.Drawing.Point(3, 29);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(396, 315);
+            this.panel1.Size = new System.Drawing.Size(396, 334);
             this.panel1.TabIndex = 20;
+            // 
+            // showDetailSwitchTipCB
+            // 
+            this.showDetailSwitchTipCB.AutoSize = true;
+            this.showDetailSwitchTipCB.ForeColor = System.Drawing.Color.White;
+            this.showDetailSwitchTipCB.Location = new System.Drawing.Point(14, 221);
+            this.showDetailSwitchTipCB.Name = "showDetailSwitchTipCB";
+            this.showDetailSwitchTipCB.Size = new System.Drawing.Size(233, 17);
+            this.showDetailSwitchTipCB.TabIndex = 29;
+            this.showDetailSwitchTipCB.Text = "Show detail-mode switch tip for hero abilities";
+            this.showDetailSwitchTipCB.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -168,7 +181,7 @@ namespace DotaHIT
             this.groupBox2.Controls.Add(this.arialFontTextBox);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(8, 222);
+            this.groupBox2.Location = new System.Drawing.Point(8, 244);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(379, 49);
             this.groupBox2.TabIndex = 28;
@@ -262,28 +275,28 @@ namespace DotaHIT
             this.fileTypesGridView.AllowUserToResizeRows = false;
             this.fileTypesGridView.BackgroundColor = System.Drawing.Color.GhostWhite;
             this.fileTypesGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.PaleTurquoise;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.fileTypesGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.PaleTurquoise;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.fileTypesGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.fileTypesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.fileTypesGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.extensionCoumn,
             this.descriptionColumn,
             this.associateColumn,
             this.contextMenuColumn});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.fileTypesGridView.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.fileTypesGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.fileTypesGridView.EnableHeadersVisualStyles = false;
             this.fileTypesGridView.Location = new System.Drawing.Point(7, 18);
             this.fileTypesGridView.MultiSelect = false;
@@ -366,7 +379,7 @@ namespace DotaHIT
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(402, 347);
+            this.ClientSize = new System.Drawing.Size(402, 366);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.closeB);
@@ -419,5 +432,6 @@ namespace DotaHIT
         private System.Windows.Forms.TextBox verdanaFontTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button chooseArialFontB;
+        private System.Windows.Forms.CheckBox showDetailSwitchTipCB;
     }
 }
