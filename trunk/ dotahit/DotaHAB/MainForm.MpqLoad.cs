@@ -25,7 +25,7 @@ namespace DotaHIT
 {
     public partial class MainForm
     {
-        internal void LoadMpq(string filename)
+        internal bool LoadMpq(string filename)
         {
             ResetMpqDatabase(); // reset everything that was loaded with previous map
 
@@ -54,15 +54,26 @@ namespace DotaHIT
             DHLOOKUP.RefreshHotEntries();
             
             // jass
-            
-            splashScreen.ShowText("compiling jass...");
-            DHJass.ReadCustom(DHRC.GetFile(Script.Custom).GetStream(), false); splashScreen.ProgressAdd(14);            
 
-            cbForm.PrepareControls();
-            
-            splashScreen.ShowText("executing jass...");
-            DHJass.Config();
-            DHJass.Go(); splashScreen.ProgressAdd(15);            
+            try
+            {
+                splashScreen.ShowText("compiling jass...");
+                DHJass.ReadCustom(DHRC.GetFile(Script.Custom).GetStream(), false); splashScreen.ProgressAdd(14);
+
+                cbForm.PrepareControls();
+
+                splashScreen.ShowText("executing jass...");
+                DHJass.Config();
+                DHJass.Go(); splashScreen.ProgressAdd(15);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Failed to load the jass script. This heavely reduces the functionality of DotaHIT, but you will still be able to use simple features like DataDump."
+                    + Environment.NewLine + "Error Message: " + e.Message);
+                return false;
+            }
+
+            return true;
         }
 
         private delegate bool folderBrowseDelegate();
