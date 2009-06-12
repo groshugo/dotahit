@@ -108,7 +108,7 @@ namespace MpqReader
                 {
                     mSeed1 = MpqArchive.DetectFileSeed(mBlockPositions, blockpossize);
                     if (mSeed1 == 0)
-                        throw new MpqParserException("Unable to determine encyption seed");
+                        throw new MpqParserException("Unable to determine encryption seed");
                 }
                 
                 MpqArchive.DecryptBlock(mBlockPositions, mSeed1);
