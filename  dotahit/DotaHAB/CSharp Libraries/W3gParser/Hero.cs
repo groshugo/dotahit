@@ -22,6 +22,7 @@ namespace Deerchao.War3Share.W3gParser
         readonly List<Dictionary<string, int>> abilitySets = new List<Dictionary<string, int>>();
         private readonly List<int> reviveTimes = new List<int>();
         private readonly Items abilities = new Items();
+        
 
         int objectId = -1;
 
