@@ -38,6 +38,7 @@ namespace DotaHIT
             this.leftPanel = new System.Windows.Forms.Panel();
             this.botPanel = new System.Windows.Forms.Panel();
             this.bgPanel = new System.Windows.Forms.Panel();
+            this.switchLabel = new System.Windows.Forms.Label();
             this.contentTLP = new System.Windows.Forms.TableLayoutPanel();
             this.ubertipRTB = new System.Windows.Forms.RichTextBox();
             this.tipRTB = new System.Windows.Forms.RichTextBox();
@@ -174,6 +175,7 @@ namespace DotaHIT
             this.bgPanel.AutoSize = true;
             this.bgPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.bgPanel.BackColor = System.Drawing.Color.Black;
+            this.bgPanel.Controls.Add(this.switchLabel);
             this.bgPanel.Controls.Add(this.contentTLP);
             this.bgPanel.Location = new System.Drawing.Point(5, 5);
             this.bgPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -181,6 +183,19 @@ namespace DotaHIT
             this.bgPanel.Name = "bgPanel";
             this.bgPanel.Size = new System.Drawing.Size(271, 55);
             this.bgPanel.TabIndex = 6;
+            // 
+            // switchLabel
+            // 
+            this.switchLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.switchLabel.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.switchLabel.ForeColor = System.Drawing.Color.DarkGray;
+            this.switchLabel.Location = new System.Drawing.Point(200, 4);
+            this.switchLabel.Name = "switchLabel";
+            this.switchLabel.Size = new System.Drawing.Size(71, 14);
+            this.switchLabel.TabIndex = 2;
+            this.switchLabel.Text = "details: ctrl+d";
+            this.switchLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.switchLabel.Visible = false;
             // 
             // contentTLP
             // 
@@ -333,11 +348,12 @@ namespace DotaHIT
         private System.Windows.Forms.Panel bgPanel;
         public System.Windows.Forms.TableLayoutPanel toolTipTLP;
         public System.Windows.Forms.TableLayoutPanel contentTLP;
-        private System.Windows.Forms.RichTextBox tipRTB;
+        private System.Windows.Forms.RichTextBox tipRTB;        
         private System.Windows.Forms.MenuStrip itemCostMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem goldcostTSMI;
         private System.Windows.Forms.Panel itemCostPanel;
         private System.Windows.Forms.ToolStripMenuItem manacostTSMI;
         private System.Windows.Forms.RichTextBox ubertipRTB;
+        private System.Windows.Forms.Label switchLabel;
     }
 }

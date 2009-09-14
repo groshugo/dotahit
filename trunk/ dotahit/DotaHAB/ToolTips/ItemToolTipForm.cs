@@ -134,7 +134,7 @@ namespace DotaHIT
 
             if (skill.Level > 0 && !isResearching)
             {
-                UIRichTextEx.Default.AddTaggedText(DHFormatter.ToString(skill.Tip), UIFonts.boldArial8, Color.White);
+                UIRichTextEx.Default.AddTaggedText(DHFormatter.ToString(skill.Tip), UIFonts.boldArial8, Color.White);                
                 tipRTB.Rtf = UIRichTextEx.Default.CloseRtf();
 
                 ShowPrices(skill.Cost, null);
@@ -178,6 +178,12 @@ namespace DotaHIT
                 }
 
                 ubertipRTB.Rtf = UIRichTextEx.Default.CloseRtf();
+            }
+
+            if (DHCFG.Items["UI"].GetIntValue("ShowDetailModeSwitchTip", 1) == 1)
+            {
+                switchLabel.Text = "details: ctrl+d";
+                switchLabel.Visible = true;
             }
         }
 
@@ -404,6 +410,12 @@ namespace DotaHIT
                     }
                     ubertipRTB.Rtf = UIRichTextEx.Default.CloseRtf();
                     break;
+            }
+
+            if (DHCFG.Items["UI"].GetIntValue("ShowDetailModeSwitchTip", 1) == 1)
+            {
+                switchLabel.Text = "back: ctrl+d";
+                switchLabel.Visible = true;
             }
         }
 
