@@ -5,6 +5,7 @@ namespace Deerchao.War3Share.W3gParser
 {
     public class ChatInfo
     {
+        private readonly int rawTime;
         private readonly TimeSpan time;
         private readonly Player from;
         private readonly TalkTo to;
@@ -13,6 +14,7 @@ namespace Deerchao.War3Share.W3gParser
 
         public ChatInfo(int time, Player from, TalkTo to, Player toPlayer, string message)
         {
+            this.rawTime = time;
             this.time = new TimeSpan(0, 0, 0, 0, time);
             this.from = from;
             this.to = to;
@@ -43,6 +45,11 @@ namespace Deerchao.War3Share.W3gParser
         public Player ToPlayer
         {
             get { return toPlayer; }
-        }        
+        }
+
+        public bool IsClone(int time, Player player, string message)
+        {
+            return this.rawTime + 250 >= time && this.from == player && this.message == message;
+        }
     }
 }
