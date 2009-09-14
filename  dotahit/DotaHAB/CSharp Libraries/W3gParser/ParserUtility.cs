@@ -57,6 +57,18 @@ namespace Deerchao.War3Share.W3gParser
             }
             return Encoding.UTF8.GetString(bytes.ToArray());
         }
+        internal static string ReadString(BinaryReader reader, out int bytesRead)
+        {
+            List<byte> bytes = new List<byte>();
+            byte b = reader.ReadByte();
+            while (b != 0)
+            {
+                bytes.Add(b);
+                b = reader.ReadByte();
+            }
+            bytesRead = bytes.Count+1;
+            return Encoding.UTF8.GetString(bytes.ToArray());
+        }
 
         internal static byte[] GetDecodedBytes(BinaryReader reader)
         {
