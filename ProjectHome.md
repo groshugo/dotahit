@@ -1,0 +1,1 @@
+DotaHIT v0.999 (also Replay Parser & Replay Finder), Hero Build Tool. Open any DotA map file, then pick your hero+items
